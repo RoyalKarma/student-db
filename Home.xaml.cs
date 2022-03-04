@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace app
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for home.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class Home : Page
     {
-        public MainWindow()
+        public Home()
         {
             InitializeComponent();
         }
