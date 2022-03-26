@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
+using app.model;
+using app.database;
 
 namespace app
 {
@@ -9,31 +13,17 @@ namespace app
     /// </summary>
     public partial class Home : Window
     {
-        private String simpleData = "RNG BUTTON";
-        private Customer[] customers = 
-        {
-            new Customer("Dodo1", "Marco1", "Dajaka adresa1"),
-            new Customer("Dodo2", "Marco2", "Dajaka adresa2"),
-            new Customer("Dodo3", "Marco3", "Dajaka adresa3"),
-            new Customer("Dodo4", "Marco4", "Dajaka adresa4") 
-        };
+        private UniversityModel model = new UniversityModel();
+        private UniversityDatabaseDataSet dataSet = new UniversityDatabaseDataSet();
+        public List<student> Students { get; set; }
 
-        public Customer[] Customers 
-        { 
-            get { return customers; } 
-            set { customers = value; }
-        }
-
-        public String SimpleData
-        {
-            get { return simpleData; }
-            set { simpleData = value; }
-        }
+        //public int Test { get; set; }
 
         public Home()
         {
             InitializeComponent();
             DataContext = this;
+            Students = model.students.ToListAsync().Result;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -48,11 +38,10 @@ namespace app
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
         }
 
         private void StudentInfoButton_Click(object sender, RoutedEventArgs e)
-        { 
+        {
         }
     }
 }

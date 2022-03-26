@@ -20,12 +20,6 @@ namespace app
     /// </summary>
     public partial class Student_info : Page
     {
-
-        public Customer customers = new Customer("Dodo", "Marco", "Dajaka adresa");
-        public string text = "111";
-
-        public Customer GetCustomer { get; set; }
-
         public Student_info()
         {
             InitializeComponent();

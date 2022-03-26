@@ -12,11 +12,13 @@
             <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click"/>
             <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="50" Margin="0,0,10,10" Click="ExitButton_Click"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="125,98,125,98">
-                <DataGrid ItemsSource="{Binding Customers}" AutoGenerateColumns="True"/>
+                <ListView ItemsSource="{Binding Students}"/>
+
+
             </Border>
             <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Student's name" VerticalAlignment="Top" Width="120" TextChanged="FilterBox_TextChanged"/>
-            <Button x:Name="StudentInfoButton" Content="{Binding SimpleData}" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click"/>
-
+            <Button x:Name="StudentInfoButton" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click"/>
+            <Label x:Name="Output" Content="Hello world" Margin="170,50,527,354"/>
         </Grid>
     </Page>
     
