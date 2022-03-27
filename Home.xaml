@@ -12,7 +12,7 @@
             <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click"/>
             <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="50" Margin="0,0,10,10" Click="ExitButton_Click"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="125,98,125,98">
-                <ListView ItemsSource="{Binding Students}"/>
+                <ListView x:Name="Listing" ItemsSource="{Binding Students, Mode=TwoWay}"/>
 
 
             </Border>
