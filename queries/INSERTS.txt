@@ -40,3 +40,13 @@ INSERT INTO subject VALUES ('Bezpečnost ICT');
 INSERT INTO subject VALUES ('Telekomunikační služby');
 INSERT INTO subject VALUES ('Elektrotechnika');
 -- TODO relations
+INSERT INTO student_has_study_program VALUES (1,1);
+INSERT INTO student_has_study_program VALUES (2,2);
+INSERT INTO student_has_study_program VALUES (3,3);
+INSERT INTO student_has_study_program VALUES (4,4);
+INSERT INTO student_has_study_program VALUES (5,5);
+INSERT INTO student_has_study_program VALUES (6,1);
+INSERT INTO student_has_study_program VALUES (7,2);
+INSERT INTO student_has_study_program VALUES (8,3);
+INSERT INTO student_has_study_program VALUES (9,4);
+INSERT INTO student_has_study_program VALUES (10,5);
