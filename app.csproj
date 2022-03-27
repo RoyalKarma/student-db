@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -84,11 +84,6 @@
     <Compile Include="model\student.cs" />
     <Compile Include="model\student_has_study_program.cs" />
     <Compile Include="model\student_has_subject.cs" />
-    <Compile Include="model\study_program.cs" />
-    <Compile Include="model\study_program_has_faculty.cs" />
-    <Compile Include="model\study_program_has_subject.cs" />
-    <Compile Include="model\subject.cs" />
-    <Compile Include="model\UniversityModel.cs" />
     <Compile Include="Student_info.xaml.cs">
       <DependentUpon>Student_info.xaml</DependentUpon>
     </Compile>
@@ -97,6 +92,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversityDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="model\study_program.cs" />
+    <Compile Include="model\study_program_has_faculty.cs" />
+    <Compile Include="model\study_program_has_subject.cs" />
+    <Compile Include="model\subject.cs" />
+    <Compile Include="model\UniversityModel.cs" />
     <Page Include="Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,7 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Home.xaml.cs">
+    <Compile Include="Home.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Page Include="Student_info.xaml">
@@ -163,7 +163,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="UniversityDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -173,5 +172,6 @@
       <DependentUpon>UniversityDatabase.mdf</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
