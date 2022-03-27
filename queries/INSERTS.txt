@@ -1,0 +1,42 @@
+INSERT INTO student VALUES ('Franta', 'Novak', 1);
+INSERT INTO student VALUES ('Miloš', 'Unešený', 1);
+INSERT INTO student VALUES ('David', 'Novotný', 2);
+INSERT INTO student VALUES ('Honza', 'Žák', 3);
+INSERT INTO student VALUES ('Aleš', 'Suchý', 2);
+INSERT INTO student VALUES ('Jaromír', 'Svoboda', 1);
+INSERT INTO student VALUES ('Karel', 'Čech', 1);
+INSERT INTO student VALUES ('Petr', 'Černý', 1);
+INSERT INTO student VALUES ('Šimon', 'Plachý', 1);
+INSERT INTO student VALUES ('Dominik', 'Nejezchleba', 1);
+
+INSERT INTO study_program VALUES ('IBE' );
+INSERT INTO study_program VALUES ('AMT' );
+INSERT INTO study_program VALUES ('AEI' );
+INSERT INTO study_program VALUES ('EKT' );
+INSERT INTO study_program VALUES ('TLI' );
+
+INSERT INTO faculty VALUES ('FEKT');
+INSERT INTO faculty VALUES ('FIT');
+INSERT INTO faculty VALUES ('FP');
+INSERT INTO faculty VALUES ('FSI');
+INSERT INTO faculty VALUES ('FCH');
+
+INSERT INTO subject VALUES ('Datové struktury');
+INSERT INTO subject VALUES ('Biochemie');
+INSERT INTO subject VALUES ('Mikroekonomie');
+INSERT INTO subject VALUES ('Programování v Jave');
+INSERT INTO subject VALUES ('Operační systémy');
+INSERT INTO subject VALUES ('Měření v elektrotechnice');
+INSERT INTO subject VALUES ('Makroekonomie');
+INSERT INTO subject VALUES ('Fyzika 1');
+INSERT INTO subject VALUES ('Fyzika 2');
+INSERT INTO subject VALUES ('Matematika 1');
+INSERT INTO subject VALUES ('Matematika 2');
+INSERT INTO subject VALUES ('Management');
+INSERT INTO subject VALUES ('Organická chemie');
+INSERT INTO subject VALUES ('Programování v Brainfucku');
+INSERT INTO subject VALUES ('Databázové systémy');
+INSERT INTO subject VALUES ('Bezpečnost ICT');
+INSERT INTO subject VALUES ('Telekomunikační služby');
+INSERT INTO subject VALUES ('Elektrotechnika');
+-- TODO relations
