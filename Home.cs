@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using app.database;
 using System.Data.SqlClient;
 using app.model;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace app
     public partial class Home : Window
     {
         private UniversityModel db = new UniversityModel();
+        private UniversityDatabaseDataSet dataSet = new UniversityDatabaseDataSet();
         public List<student> Students { get; set; }
 
         public Home()
