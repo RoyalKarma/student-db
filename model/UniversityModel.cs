@@ -8,7 +8,7 @@ namespace app.model
     public partial class UniversityModel : DbContext
     {
         public UniversityModel()
-            : base("name=UniversityModel")
+            : base("UniversityModel")
         {
         }
 

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Windows;
 using System.Windows.Controls;
 using app.database;
 using System.Data.SqlClient;
-using System.Text;
-using System.Data.Entity.Core.EntityClient;
-using System.Collections.ObjectModel;
-using System.Windows.Navigation;
+using app.model;
+using System.Linq;
 
 namespace app
 {
@@ -17,21 +14,26 @@ namespace app
     /// </summary>
     public partial class Home : Window
     {
-        private UniversityModel model = new UniversityModel();
+        private UniversityModel db = new UniversityModel();
         private UniversityDatabaseDataSet dataSet = new UniversityDatabaseDataSet();
         public List<student> Students { get; set; }
 
-        //public int Test { get; set; }
-
         public Home()
         {          
-            //TODO- jak bindovat z více tabulek?
             InitializeComponent();
-            string query = "SELECT id_student, first_name, last_name, year, program_name FROM student" +
-               " LEFT JOIN student_has_study_program shsp ON shsp.student_id = id_student" +
-               " LEFT JOIN study_program sp on sp.program_id = shsp.program_id";
-            Students = model.students.SqlQuery(query).ToListAsync().Result;
-            StudentGrid.DataContext = Students;
+
+            var query =
+               from s in db.students
+               join shasp in db.student_has_study_program on s.id_student equals shasp.student_id
+               join p in db.study_program on shasp.program_id equals p.program_id
+               select new { 
+                   first_name = s.first_name, 
+                   last_name = s.last_name,
+                   year = s.year,
+                   program_name = p.program_name
+               };
+
+            StudentGrid.DataContext = query.ToList();
             
         }
 
@@ -56,7 +58,7 @@ namespace app
                 
                 SqlParameter sp = new SqlParameter("student_name", FilterBox.Text);
                 
-                Students = model.students.SqlQuery(query,sp).ToListAsync().Result;
+                Students = db.students.SqlQuery(query,sp).ToListAsync().Result;
                 if (Output != null)
                 {
                     Output.Content = Students.Count;
