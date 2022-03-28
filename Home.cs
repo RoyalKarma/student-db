@@ -24,11 +24,13 @@ namespace app
         //public int Test { get; set; }
 
         public Home()
-        {
-            
+        {          
+            //TODO- jak bindovat z více tabulek?
             InitializeComponent();
-
-            Students = model.students.ToListAsync().Result;
+            string query = "SELECT id_student, first_name, last_name, year, program_name FROM student" +
+               " LEFT JOIN student_has_study_program shsp ON shsp.student_id = id_student" +
+               " LEFT JOIN study_program sp on sp.program_id = shsp.program_id";
+            Students = model.students.SqlQuery(query).ToListAsync().Result;
             StudentGrid.DataContext = Students;
             
         }
@@ -50,16 +52,16 @@ namespace app
         {
             try
             {
-                string query = "select * from student where first_name = @student_name";   
+                string query = "SELECT * FROM student WHERE first_name = @student_name";   
                 
                 SqlParameter sp = new SqlParameter("student_name", FilterBox.Text);
                 
                 Students = model.students.SqlQuery(query,sp).ToListAsync().Result;
-                /*if (Output != null)
+                if (Output != null)
                 {
                     Output.Content = Students.Count;
-                    Listing.ItemsSource = Students;
-                }*/
+                    StudentGrid.ItemsSource = Students;
+                }
             }
             catch (AggregateException) { }
         }

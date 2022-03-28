@@ -17,7 +17,8 @@
                         <DataGridTextColumn Header="First Name"  Binding="{Binding first_name}"/>
                         <DataGridTextColumn Header="Last Name" Binding="{Binding last_name}" />
                         <DataGridTextColumn Header="year" Binding="{Binding year}" />
-                       
+                        <DataGridTextColumn Header="Program" Binding="{Binding program_name}" />
+
                     </DataGrid.Columns>
                 </DataGrid>
 
