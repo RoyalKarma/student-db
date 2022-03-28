@@ -82,6 +82,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="database\UniversityDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniversityDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="model\faculty.cs" />
     <Compile Include="model\grade.cs" />
     <Compile Include="model\student.cs" />
@@ -89,11 +94,6 @@
     <Compile Include="model\student_has_subject.cs" />
     <Compile Include="Student_info.xaml.cs">
       <DependentUpon>Student_info.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="database\UniversityDatabaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UniversityDatabaseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="model\study_program.cs" />
     <Compile Include="model\study_program_has_faculty.cs" />
@@ -134,21 +134,21 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="database\UniversityDataSet.xsc">
+      <DependentUpon>UniversityDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="database\UniversityDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UniversityDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="database\UniversityDataSet.xss">
+      <DependentUpon>UniversityDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="database\UniversityDatabaseDataSet.xsc">
-      <DependentUpon>UniversityDatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="database\UniversityDatabaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>UniversityDatabaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="database\UniversityDatabaseDataSet.xss">
-      <DependentUpon>UniversityDatabaseDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
