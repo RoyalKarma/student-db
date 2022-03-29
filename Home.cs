@@ -49,13 +49,16 @@ namespace app
             
 
         }
+        
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var query =
-               from s in db.students where s.first_name.Contains(FilterBox.Text)
+               from s in db.students             
                join shasp in db.student_has_study_program on s.id_student equals shasp.student_id
                join p in db.study_program on shasp.program_id equals p.program_id
+               where s.first_name.Contains(FilterBox.Text) | p.program_name.Contains(FilterBox.Text)//| s.last_name.Contains(FilterBox.Text) 
+               
                select new
                {
                    first_name = s.first_name,
@@ -63,6 +66,10 @@ namespace app
                    year = s.year,
                    program_name = p.program_name
                };
+               
+               
+           
+            
 
             StudentGrid.ItemsSource = query.ToList();
         }
