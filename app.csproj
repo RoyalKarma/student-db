@@ -16,6 +16,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -30,8 +32,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -87,20 +87,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversityDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="model\faculty.cs" />
+    <Compile Include="HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="model\grade.cs" />
     <Compile Include="model\student.cs" />
+    <Compile Include="model\student_has_grade.cs" />
     <Compile Include="model\student_has_study_program.cs" />
     <Compile Include="model\student_has_subject.cs" />
-    <Compile Include="Student_info.xaml.cs">
-      <DependentUpon>Student_info.xaml</DependentUpon>
-    </Compile>
     <Compile Include="model\study_program.cs" />
-    <Compile Include="model\study_program_has_faculty.cs" />
     <Compile Include="model\study_program_has_subject.cs" />
     <Compile Include="model\subject.cs" />
-    <Compile Include="model\UniversityModel.cs" />
-    <Page Include="Home.xaml">
+    <Compile Include="model\UniModel.cs" />
+    <Compile Include="StudentInfoPage.xaml.cs">
+      <DependentUpon>StudentInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="HomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,9 +111,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Home.cs">
-      <DependentUpon>Home.xaml</DependentUpon>
+      <DependentUpon>HomeWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Student_info.xaml">
+    <Page Include="HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StudentInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,15 +173,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UniversityDatabase.mdf">
+    <Content Include="UniDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="UniversityDatabase_log.ldf">
+    <Content Include="UniDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>UniversityDatabase.mdf</DependentUpon>
+      <DependentUpon>UniDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

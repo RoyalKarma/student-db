@@ -13,68 +13,11 @@ namespace app
     /// <summary>
     /// Interaction logic for home.xaml
     /// </summary>
-    public partial class Home : Window
+    public partial class HomeWindow : Window
     {
-        private UniversityModel db = new UniversityModel();
-        public List<student> Students { get; set; }
-
-        public Home()
-        {          
+       public HomeWindow()
+        {
             InitializeComponent();
-
-            var query =
-               from s in db.students
-               join shasp in db.student_has_study_program on s.id_student equals shasp.student_id
-               join p in db.study_program on shasp.program_id equals p.program_id
-               select new { 
-                   first_name = s.first_name, 
-                   last_name = s.last_name,
-                   year = s.year,
-                   program_name = p.program_name
-               };
-
-            StudentGrid.DataContext = query.ToList();
-            
-        }
-
-    
-
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        private void AddStudentButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-        }
-        
-
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var query =
-               from s in db.students             
-               join shasp in db.student_has_study_program on s.id_student equals shasp.student_id
-               join p in db.study_program on shasp.program_id equals p.program_id
-               where s.first_name.Contains(FilterBox.Text) | p.program_name.Contains(FilterBox.Text)//| s.last_name.Contains(FilterBox.Text) 
-               
-               select new
-               {
-                   first_name = s.first_name,
-                   last_name = s.last_name,
-                   year = s.year,
-                   program_name = p.program_name
-               };
-               
-               
-           
-            
-
-            StudentGrid.ItemsSource = query.ToList();
-        }
-        private void StudentInfoButton_Click(object sender, RoutedEventArgs e)
-        {
         }
        
     }

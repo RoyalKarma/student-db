@@ -12,13 +12,13 @@ namespace app.model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public student()
         {
-            grades = new HashSet<grade>();
+            student_has_grade = new HashSet<student_has_grade>();
             student_has_study_program = new HashSet<student_has_study_program>();
             student_has_subject = new HashSet<student_has_subject>();
         }
 
         [Key]
-        public int id_student { get; set; }
+        public int student_id { get; set; }
 
         [Required]
         [StringLength(45)]
@@ -31,17 +31,12 @@ namespace app.model
         public short year { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<grade> grades { get; set; }
+        public virtual ICollection<student_has_grade> student_has_grade { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<student_has_study_program> student_has_study_program { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<student_has_subject> student_has_subject { get; set; }
-
-        public override string ToString()
-        {
-            return first_name + " " + last_name + " " + year.ToString();
-        }
     }
 }

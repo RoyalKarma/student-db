@@ -12,7 +12,6 @@ namespace app.model
         public study_program()
         {
             student_has_study_program = new HashSet<student_has_study_program>();
-            study_program_has_faculty = new HashSet<study_program_has_faculty>();
             study_program_has_subject = new HashSet<study_program_has_subject>();
         }
 
@@ -25,9 +24,6 @@ namespace app.model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<student_has_study_program> student_has_study_program { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<study_program_has_faculty> study_program_has_faculty { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<study_program_has_subject> study_program_has_subject { get; set; }
