@@ -1,0 +1,240 @@
+DROP TABLE IF EXISTS [student] ;
+CREATE TABLE student (
+  [student_id] INT NOT NULL IDENTITY,
+  [first_name] VARCHAR(45) NOT NULL,
+  [last_name] VARCHAR(45) NOT NULL,
+  [year] SMALLINT NOT NULL,
+  PRIMARY KEY ([student_id]));
+
+DROP TABLE IF EXISTS faculty ;
+CREATE TABLE faculty (
+  [faculty_id] INT NOT NULL IDENTITY,
+  [faculty_name] VARCHAR(45) NOT NULL,
+  [abbrevation] VARCHAR(45) NOT NULL,
+  PRIMARY KEY ([faculty_id]));
+
+DROP TABLE IF EXISTS [student_has_faculty] ;
+CREATE TABLE student_has_faculty (
+  [id] INT NOT NULL IDENTITY,
+  [student_id] INT NOT NULL,
+  [faculty_id] INT NOT NULL,
+  PRIMARY KEY ([id], [student_id], [faculty_id]),
+  CONSTRAINT [fk_student_has_faculty_student]
+    FOREIGN KEY ([student_id])
+    REFERENCES student ([student_id])
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT [fk_student_has_faculty1]
+    FOREIGN KEY ([faculty_id])
+    REFERENCES faculty ([faculty_id])
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
+
+DROP TABLE IF EXISTS [subject] ;
+CREATE TABLE subject (
+  [subject_id] INT NOT NULL IDENTITY,
+  [subject_name] VARCHAR(45) NOT NULL,
+  PRIMARY KEY ([subject_id]));
+
+DROP TABLE IF EXISTS [student_has_subject] ;
+CREATE TABLE student_has_subject (
+  [id] INT NOT NULL IDENTITY,
+  [student_id] INT NOT NULL,
+  [subject_id] INT NOT NULL,
+  PRIMARY KEY ([id], [student_id], [subject_id]),
+  CONSTRAINT [fk_student_has_subject_student1]
+    FOREIGN KEY ([student_id])
+    REFERENCES student ([student_id])
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT [fk_student_has_subject_subject1]
+    FOREIGN KEY ([subject_id])
+    REFERENCES subject ([subject_id])
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+DROP TABLE IF EXISTS [grade] ;
+CREATE TABLE grade (
+  [grade_id] INT NOT NULL IDENTITY,
+  [subject_id] INT NOT NULL,
+  [grade] INT NULL,
+  PRIMARY KEY ([grade_id]),
+  CONSTRAINT [fk_grade_subject1]
+    FOREIGN KEY ([subject_id])
+    REFERENCES subject ([subject_id])
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+DROP TABLE IF EXISTS [student_has_grade] ;
+CREATE TABLE student_has_grade (
+  [id] INT NOT NULL IDENTITY,
+  [student_id] INT NOT NULL,
+  [grade_id] INT NOT NULL,
+  PRIMARY KEY ([id], [student_id], [grade_id]),
+  CONSTRAINT [fk_student_has_grade_student1]
+    FOREIGN KEY ([student_id])
+    REFERENCES student ([student_id])
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT [fk_student_has_grade_grade1]
+    FOREIGN KEY ([grade_id])
+    REFERENCES grade ([grade_id])
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+
+INSERT INTO student VALUES ('Franta', 'Novak', 1);
+INSERT INTO student VALUES ('Miloš', 'Unešený', 1);
+INSERT INTO student VALUES ('David', 'Novotný', 2);
+INSERT INTO student VALUES ('Honza', 'Žák', 3);
+INSERT INTO student VALUES ('Aleš', 'Suchý', 2);
+INSERT INTO student VALUES ('Jaromír', 'Svoboda', 1);
+INSERT INTO student VALUES ('Karel', 'Čech', 1);
+INSERT INTO student VALUES ('Petr', 'Černý', 1);
+INSERT INTO student VALUES ('Šimon', 'Plachý', 1);
+INSERT INTO student VALUES ('Dominik', 'Nejezchleba', 1);
+
+INSERT INTO faculty VALUES ('Fakulta elektrotechniky', FEKT);
+INSERT INTO faculty VALUES ('Fakulta podnikatelksá', FP);
+INSERT INTO faculty VALUES ('Fakulta informatiky, FIT)
+INSERT INTO faculty VALUES ('Fakulta chemická, FCH);
+
+INSERT INTO subject VALUES ('Datové struktury');
+INSERT INTO subject VALUES ('Biochemie');
+INSERT INTO subject VALUES ('Mikroekonomie');
+INSERT INTO subject VALUES ('Programování v Jave');
+INSERT INTO subject VALUES ('Operační systémy');
+INSERT INTO subject VALUES ('Měření v elektrotechnice');
+INSERT INTO subject VALUES ('Makroekonomie');
+INSERT INTO subject VALUES ('Fyzika 1');
+INSERT INTO subject VALUES ('Fyzika 2');
+INSERT INTO subject VALUES ('Matematika 1');
+INSERT INTO subject VALUES ('Matematika 2');
+INSERT INTO subject VALUES ('Management');
+INSERT INTO subject VALUES ('Organická chemie');
+INSERT INTO subject VALUES ('Programování v Brainfucku');
+INSERT INTO subject VALUES ('Databázové systémy');
+INSERT INTO subject VALUES ('Bezpečnost ICT');
+INSERT INTO subject VALUES ('Telekomunikační služby');
+INSERT INTO subject VALUES ('Elektrotechnika');
+INSERT INTO subject VALUES ('Matematika 3');
+INSERT INTO subject VALUES ('Angličtina pre inžinierov');
+
+-- TODO relations
+
+
+
+INSERT INTO student_has_subject VALUES (1,1);
+INSERT INTO student_has_subject VALUES (2,2);
+INSERT INTO student_has_subject VALUES (3,3);
+INSERT INTO student_has_subject VALUES (4,4);
+INSERT INTO student_has_subject VALUES (5,5);
+INSERT INTO student_has_subject VALUES (6,6);
+INSERT INTO student_has_subject VALUES (7,7);
+INSERT INTO student_has_subject VALUES (8,8);
+INSERT INTO student_has_subject VALUES (9,9);
+INSERT INTO student_has_subject VALUES (10,10);
+INSERT INTO student_has_subject VALUES (1,11);
+INSERT INTO student_has_subject VALUES (2,12);
+INSERT INTO student_has_subject VALUES (3,13);
+INSERT INTO student_has_subject VALUES (4,14);
+INSERT INTO student_has_subject VALUES (5,15);
+INSERT INTO student_has_subject VALUES (6,16);
+INSERT INTO student_has_subject VALUES (7,17);
+INSERT INTO student_has_subject VALUES (8,18);
+INSERT INTO student_has_subject VALUES (9,19);
+INSERT INTO student_has_subject VALUES (10,20);
+
+INSERT INTO grade VALUES (1,1);
+INSERT INTO grade VALUES (2,2);
+INSERT INTO grade VALUES (3,3);
+INSERT INTO grade VALUES (4,4);
+INSERT INTO grade VALUES (5,5);
+INSERT INTO grade VALUES (6,1);
+INSERT INTO grade VALUES (7,2);
+INSERT INTO grade VALUES (8,3);
+INSERT INTO grade VALUES (9,4);
+INSERT INTO grade VALUES (10,5);
+INSERT INTO grade VALUES (11,1);
+INSERT INTO grade VALUES (12,2);
+INSERT INTO grade VALUES (13,3);
+INSERT INTO grade VALUES (14,4);
+INSERT INTO grade VALUES (15,5);
+INSERT INTO grade VALUES (16,1);
+INSERT INTO grade VALUES (17,2);
+INSERT INTO grade VALUES (18,3);
+INSERT INTO grade VALUES (19,4);
+INSERT INTO grade VALUES (20,5);
+INSERT INTO grade VALUES (1,2);
+INSERT INTO grade VALUES (2,3);
+INSERT INTO grade VALUES (3,4);
+INSERT INTO grade VALUES (4,5);
+INSERT INTO grade VALUES (5,1);
+INSERT INTO grade VALUES (6,2);
+INSERT INTO grade VALUES (7,3);
+INSERT INTO grade VALUES (8,4);
+INSERT INTO grade VALUES (9,5);
+INSERT INTO grade VALUES (10,1);
+INSERT INTO grade VALUES (11,2);
+INSERT INTO grade VALUES (12,3);
+INSERT INTO grade VALUES (13,4);
+INSERT INTO grade VALUES (14,5);
+INSERT INTO grade VALUES (15,1);
+INSERT INTO grade VALUES (16,2);
+INSERT INTO grade VALUES (17,3);
+INSERT INTO grade VALUES (18,4);
+INSERT INTO grade VALUES (19,5);
+INSERT INTO grade VALUES (20,1);
+
+
+INSERT INTO student_has_grade VALUES (1,1);
+INSERT INTO student_has_grade VALUES (2,2);
+INSERT INTO student_has_grade VALUES (3,3);
+INSERT INTO student_has_grade VALUES (4,4);
+INSERT INTO student_has_grade VALUES (5,5);
+INSERT INTO student_has_grade VALUES (6,6);
+INSERT INTO student_has_grade VALUES (7,7);
+INSERT INTO student_has_grade VALUES (8,8);
+INSERT INTO student_has_grade VALUES (9,9);
+INSERT INTO student_has_grade VALUES (10,10);
+INSERT INTO student_has_grade VALUES (11,11);
+INSERT INTO student_has_grade VALUES (12,12);
+INSERT INTO student_has_grade VALUES (13,13);
+INSERT INTO student_has_grade VALUES (14,14);
+INSERT INTO student_has_grade VALUES (15,15);
+INSERT INTO student_has_grade VALUES (16,16);
+INSERT INTO student_has_grade VALUES (17,17);
+INSERT INTO student_has_grade VALUES (18,18);
+INSERT INTO student_has_grade VALUES (19,19);
+INSERT INTO student_has_grade VALUES (20,20);
+INSERT INTO student_has_grade VALUES (1,21);
+INSERT INTO student_has_grade VALUES (2,22);
+INSERT INTO student_has_grade VALUES (3,23);
+INSERT INTO student_has_grade VALUES (4,24);
+INSERT INTO student_has_grade VALUES (5,25);
+INSERT INTO student_has_grade VALUES (6,26);
+INSERT INTO student_has_grade VALUES (7,27);
+INSERT INTO student_has_grade VALUES (8,28);
+INSERT INTO student_has_grade VALUES (9,29);
+INSERT INTO student_has_grade VALUES (10,30);
+INSERT INTO student_has_grade VALUES (11,31);
+INSERT INTO student_has_grade VALUES (12,32);
+INSERT INTO student_has_grade VALUES (13,33);
+INSERT INTO student_has_grade VALUES (14,34);
+INSERT INTO student_has_grade VALUES (15,35);
+INSERT INTO student_has_grade VALUES (16,36);
+INSERT INTO student_has_grade VALUES (17,37);
+INSERT INTO student_has_grade VALUES (18,38);
+INSERT INTO student_has_grade VALUES (19,39);
+INSERT INTO student_has_grade VALUES (20,40);
+
+INSERT INTO student_has_faculty VALUES (1,1);
+INSERT INTO student_has_faculty VALUES (2,1);
+INSERT INTO student_has_faculty VALUES (3,1);
+INSERT INTO student_has_faculty VALUES (4,1);
+INSERT INTO student_has_faculty VALUES (5,1);
+INSERT INTO student_has_faculty VALUES (6,1);
+INSERT INTO student_has_faculty VALUES (7,1);
+INSERT INTO student_has_faculty VALUES (8,1);
+INSERT INTO student_has_faculty VALUES (9,1);
+INSERT INTO student_has_faculty VALUES (10,1);
