@@ -21,11 +21,12 @@
         <Label Content="Filter by first name or program" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Height="28" Width="203"/>
         <DataGrid x:Name="studentDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,35,10,42" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="student_idColumn" Binding="{Binding student_id}" Header="student id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="first name" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="last_nameColumn" Binding="{Binding last_name}" Header="last name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="student_idColumn" Binding="{Binding student_id}" Header="student id" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="year" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="faculty" Binding="{Binding abbrevation}" Header="faculty" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="facultyColumn" Binding="{Binding abbrevation}" Header="faculty" Width="SizeToHeader"/>
+                
 
             </DataGrid.Columns>
         </DataGrid>

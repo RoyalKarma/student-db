@@ -63,20 +63,23 @@ namespace app
 
         private void AddStudentButton_Click(object sender, RoutedEventArgs e)
         {
-
-            var student = new student
+            using (var context = new UniDBEntities1()) { 
+            student newStudent = new student()
             {
-                first_name = "jmeno",
-                last_name = "prijmeni",
-                year = 2
-            };
-            
-                db.students.Add(student);
-                db.SaveChanges();
-
-            
+                first_name = "Jmeno",
+                last_name = "Prijmeni",
+                year = 1,
                 
-        
+            };
+            student_has_faculty faculty_bind = new student_has_faculty() { faculty_id = 1, student_id = newStudent.student_id };
+                context.students.Add(newStudent);
+                context.student_has_faculty.Add(faculty_bind);
+                Console.WriteLine(context.SaveChanges()); 
+            }
+
+
+
+
         }
      
 
@@ -86,7 +89,7 @@ namespace app
             var query =
                 from s in db.students
                 join shasp in db.student_has_faculty on s.student_id equals shasp.student_id
-                join p in db.faculties on shasp.faculty_id equals p.faculty_id          
+               join p in db.faculties on shasp.faculty_id equals p.faculty_id          
                 where s.first_name.Contains(FilterBox.Text) | p.faculty_name.Contains(FilterBox.Text)//| s.last_name.Contains(FilterBox.Text) 
                 select new
                 {
