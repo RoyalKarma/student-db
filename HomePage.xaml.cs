@@ -63,7 +63,11 @@ namespace app
 
         private void AddStudentButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new UniDBEntities1()) { 
+
+
+
+           NavigationService.Navigate(new AddStudentPage());
+            /*using (var context = new UniDBEntities1()) { 
             student newStudent = new student()
             {
                 first_name = "Jmeno",
@@ -75,13 +79,13 @@ namespace app
                 context.students.Add(newStudent);
                 context.student_has_faculty.Add(faculty_bind);
                 Console.WriteLine(context.SaveChanges()); 
-            }
+            }*/
 
 
 
 
         }
-     
+
 
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -118,10 +122,27 @@ namespace app
             
         }
         
-        private int parseID() { //needed to extract year from db for filtering
+        private int parseID() { 
             string s = studentDataGrid.SelectedValue.ToString();
             s = s.Substring(1, s.Length - 2).Trim().Split(',')[0].Split('=')[1].Trim();
             return int.Parse(s); 
+        }
+
+        private void studentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            int id = parseID();
+            var student = (from s in db.students
+                           where s.student_id == id
+                           select s).SingleOrDefault();
+            db.students.Remove(student);
+            db.SaveChanges();
+            this.NavigationService.Refresh();
+
         }
     }
 }

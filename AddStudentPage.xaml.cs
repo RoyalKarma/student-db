@@ -40,15 +40,34 @@ namespace app
                 
                 student_has_faculty faculty_bind = new student_has_faculty() 
                 {
-                    faculty_id =  int.Parse(facultyIDBox.SelectedIndex.ToString()),
+                    faculty_id =  int.Parse(facultyIDBox.SelectedIndex.ToString()) + 1,
                     student_id = newStudent.student_id
                 };
                 context.students.Add(newStudent);
                 context.student_has_faculty.Add(faculty_bind);
                 Console.WriteLine( faculty_bind.faculty_id );
                 Console.WriteLine(context.SaveChanges());
+                MyPopup.IsOpen = true;
             }
+
         }
-     
+        private void Show_Click(object sender, RoutedEventArgs e)
+
+        {
+
+            MyPopup.IsOpen = true;
+
+        }
+
+
+
+        private void Hide_Click(object sender, RoutedEventArgs e)
+
+        {
+
+            MyPopup.IsOpen = false;
+
+        }
+
     }
 }
