@@ -186,13 +186,12 @@
       <DependentUpon>UniversityDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\faculty.datasource" />
     <None Include="Properties\DataSources\grade.datasource" />
     <None Include="Properties\DataSources\student.datasource" />
+    <None Include="Properties\DataSources\student_has_faculty.datasource" />
     <None Include="Properties\DataSources\student_has_grade.datasource" />
-    <None Include="Properties\DataSources\student_has_study_program.datasource" />
     <None Include="Properties\DataSources\student_has_subject.datasource" />
-    <None Include="Properties\DataSources\study_program.datasource" />
-    <None Include="Properties\DataSources\study_program_has_subject.datasource" />
     <None Include="Properties\DataSources\subject.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

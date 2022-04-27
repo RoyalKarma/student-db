@@ -20,54 +20,49 @@ namespace app
     /// </summary>
     public partial class AddStudentPage : Page
     {
-        UniDBEntities1 context = new UniDBEntities1();
         public AddStudentPage()
         {
             InitializeComponent();
-           
         }
         private void AddStudentButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new UniDBEntities1())
+            using (var context = new UniDBEntities())
             {
-                student newStudent = new student()
+                try
                 {
-                    first_name =  first_nameTextBox.Text,
-                    last_name = last_nameTextBox.Text,
-                    year = short.Parse(yearTextBox.Text),
+                    student newStudent = new student()
+                    {
+                        first_name = first_nameTextBox.Text,
+                        last_name = last_nameTextBox.Text,
+                        year = short.Parse(yearTextBox.Text),
 
-                };
-                
-                student_has_faculty faculty_bind = new student_has_faculty() 
+                    }; 
+                    student_has_faculty faculty_bind = new student_has_faculty()
+                    {
+                        faculty_id = int.Parse(facultyIDBox.SelectedIndex.ToString()) + 1,
+                        student_id = newStudent.student_id
+                    };
+                    context.students.Add(newStudent);
+                    context.student_has_faculty.Add(faculty_bind);
+                    context.SaveChanges();
+                    MyPopup.IsOpen = true;
+                }
+                catch
                 {
-                    faculty_id =  int.Parse(facultyIDBox.SelectedIndex.ToString()) + 1,
-                    student_id = newStudent.student_id
-                };
-                context.students.Add(newStudent);
-                context.student_has_faculty.Add(faculty_bind);
-                Console.WriteLine( faculty_bind.faculty_id );
-                Console.WriteLine(context.SaveChanges());
-                MyPopup.IsOpen = true;
+                    return;
+                }
             }
 
         }
+
         private void Show_Click(object sender, RoutedEventArgs e)
-
         {
-
             MyPopup.IsOpen = true;
-
         }
-
-
 
         private void Hide_Click(object sender, RoutedEventArgs e)
-
         {
-
             MyPopup.IsOpen = false;
-
         }
-
     }
 }

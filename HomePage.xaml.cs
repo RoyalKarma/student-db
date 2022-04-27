@@ -22,14 +22,12 @@ namespace app
     /// </summary>
     public partial class HomePage : Page
     {
-        UniDBEntities1 db = new UniDBEntities1();
+        UniDBEntities db = new UniDBEntities();
         CollectionViewSource studentViewSource;
-
         public List<student> Students { get; set; }
 
         public HomePage()
         {
-
             InitializeComponent();
             studentViewSource = ((CollectionViewSource)(FindResource("studentViewSource")));
             var query =
@@ -43,18 +41,12 @@ namespace app
                     last_name = s.last_name,
                     year = s.year,
                     abbrevation = p.abbrevation
-                   
+
                 };
             DataContext = this;
             db.students.Load();
             studentViewSource.Source = query.ToList();
-
-
-
-
         }
-
-
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -63,37 +55,15 @@ namespace app
 
         private void AddStudentButton_Click(object sender, RoutedEventArgs e)
         {
-
-
-
-           NavigationService.Navigate(new AddStudentPage());
-            /*using (var context = new UniDBEntities1()) { 
-            student newStudent = new student()
-            {
-                first_name = "Jmeno",
-                last_name = "Prijmeni",
-                year = 1,
-                
-            };
-            student_has_faculty faculty_bind = new student_has_faculty() { faculty_id = 1, student_id = newStudent.student_id };
-                context.students.Add(newStudent);
-                context.student_has_faculty.Add(faculty_bind);
-                Console.WriteLine(context.SaveChanges()); 
-            }*/
-
-
-
-
+            NavigationService.Navigate(new AddStudentPage());
         }
-
-
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var query =
                 from s in db.students
                 join shasp in db.student_has_faculty on s.student_id equals shasp.student_id
-               join p in db.faculties on shasp.faculty_id equals p.faculty_id          
+                join p in db.faculties on shasp.faculty_id equals p.faculty_id
                 where s.first_name.Contains(FilterBox.Text) | p.faculty_name.Contains(FilterBox.Text)//| s.last_name.Contains(FilterBox.Text) 
                 select new
                 {
@@ -104,33 +74,23 @@ namespace app
                     abbrevation = p.abbrevation
 
                 };
-
-
-
-
-
             studentDataGrid.ItemsSource = query.ToList();
         }
+
         private void StudentInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            if(studentDataGrid.SelectedValue != null)
+            if (studentDataGrid.SelectedValue != null)
             {
                 //NavigationService.Navigate(new StudentInfoPage(parseID()));
                 studentDataGrid.SelectedValue = null;
             }
-            
-            
         }
-        
-        private int parseID() { 
+
+        private int parseID()
+        {
             string s = studentDataGrid.SelectedValue.ToString();
             s = s.Substring(1, s.Length - 2).Trim().Split(',')[0].Split('=')[1].Trim();
-            return int.Parse(s); 
-        }
-
-        private void studentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            return int.Parse(s);
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
@@ -140,9 +100,17 @@ namespace app
                            where s.student_id == id
                            select s).SingleOrDefault();
             db.students.Remove(student);
-            db.SaveChanges();
+            try { db.SaveChanges(); } catch { return; }
             this.NavigationService.Refresh();
+            deleteButton.IsEnabled = false;
+        }
 
+        private void studentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                deleteButton.IsEnabled = true;
+            }
         }
     }
 }
