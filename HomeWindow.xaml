@@ -8,6 +8,5 @@
       MinHeight="400" MinWidth="500"
       Height="500" Width="600"
       Title="Studisn't">
-      <Frame Name="HomePage" Source="HomePage.xaml" />
-    
+    <Frame Name="HomePage" Source="HomePage.xaml"/>
 </Window>

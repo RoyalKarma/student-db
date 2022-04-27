@@ -5,30 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:app"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="400" d:DesignWidth="500"
       Title="AddStudentPage">
-
-    <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="260,154,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.492,0.495" Width="77">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left" Margin="-193,0,0,3" Width="103" Height="33" VerticalAlignment="Bottom" Click="AddStudentButton_Click"/>
-        <Label Content="first name:" Grid.Column="0" HorizontalAlignment="Left" Margin="-237,-120,0,139" Grid.Row="0" VerticalAlignment="Center" Height="27" Width="67"/>
-        <TextBox x:Name="first_nameTextBox" HorizontalAlignment="Left" Height="24" Margin="-165,-118,0,140" Grid.Row="0" Text="{Binding first_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="124"/>
-        <Label Content="last name:" Grid.Column="0" HorizontalAlignment="Left" Margin="-234,-86,0,105" VerticalAlignment="Center" Height="27" Width="66"/>
-        <TextBox x:Name="last_nameTextBox" HorizontalAlignment="Left" Height="24" Margin="-165,-86,0,108" Text="{Binding last_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="124"/>
-        <Label Content="faculty id:" Grid.Column="0" HorizontalAlignment="Left" Margin="-234,-53,0,72" VerticalAlignment="Center" Height="27" Width="63"/>
-        <Label Content="year:" Grid.Column="0" HorizontalAlignment="Left" Margin="-234,-20,0,39" VerticalAlignment="Center" Height="27" Width="36"/>
-        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="24" Margin="-165,-19,0,41" Text="{Binding year, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="124"/>
-        <ComboBox x:Name="facultyIDBox" Margin="-165,-53,42,72" RenderTransformOrigin="0.5,0.5">
-
+    <Grid Width="500" Height="400">
+        <Button x:Name="addStudentButton" Content="Add student" HorizontalAlignment="Left"  Width="114" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click" Margin="10,0,0,10"/>
+        <Button x:Name="cancelButton" HorizontalAlignment="Right" Width="88" Height="32" VerticalAlignment="Bottom" Margin="0,0,10,10" Content="Cancel"/>
+        <Label Content="first name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="10,10,0,0"/>
+        <TextBox x:Name="first_nameTextBox" HorizontalAlignment="Left" Height="22" Text="{Binding first_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="125" Margin="89,14,0,0"/>
+        <Label Content="last name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Margin="10,41,0,0"/>
+        <TextBox x:Name="last_nameTextBox" HorizontalAlignment="Left" Height="22" Text="{Binding last_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="125" Margin="89,45,0,0"/>
+        <Label Content="faculty id:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="10,72,0,0"/>
+        <Label Content="year:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="36" Margin="10,103,0,0"/>
+        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="24" Width="125" Text="{Binding year, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Margin="89,105,0,0"/>
+        <ComboBox x:Name="facultyIDBox" Margin="89,74,0,0" Height="24" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left">
             <ComboBoxItem>
                 <TextBlock>FEKT</TextBlock>
             </ComboBoxItem>
@@ -37,29 +26,20 @@
             </ComboBoxItem>
         </ComboBox>
         <Popup Name="MyPopup"
-
                Placement="Mouse"
-
                HorizontalOffset="-50"
-
                VerticalOffset="-50"
-
                AllowsTransparency="True">
             <Border BorderBrush="Black" BorderThickness="2">
-            <Grid Background="White" Width="333" Height="205"  >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="173*"/>
-                    <RowDefinition Height="52*"/>
-                </Grid.RowDefinitions>
-
-
-                <TextBlock Text="Student added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
-
-                <Button Click="Hide_Click" Margin="92,0,0,45" HorizontalAlignment="Left" Width="142" Height="65" VerticalAlignment="Bottom" Grid.RowSpan="2">Hide</Button>
-
-            </Grid>
+                <Grid Background="White" Width="333" Height="205"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="173*"/>
+                        <RowDefinition Height="52*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Student added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
+                    <Button Click="Hide_Click" Margin="92,0,0,45" HorizontalAlignment="Left" Width="142" Height="65" VerticalAlignment="Bottom" Grid.RowSpan="2">Hide</Button>
+                </Grid>
             </Border>
-
         </Popup>
     </Grid>
 

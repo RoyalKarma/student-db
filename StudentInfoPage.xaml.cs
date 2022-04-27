@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,10 +16,13 @@ using System.Windows.Shapes;
 namespace app
 {
     /// <summary>
-    /// Interaction logic for Student_info.xaml
+    /// Interaction logic for StudentInfoPage.xaml
     /// </summary>
     public partial class StudentInfoPage : Page
     {
-        
+        public StudentInfoPage()
+        {
+            InitializeComponent();
+        }
     }
 }
