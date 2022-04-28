@@ -33,6 +33,7 @@ namespace app
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddGradePage(StudentID));
+            NavigationService.Refresh();
         }
 
         private void EditGradeButton_Click(object sender, RoutedEventArgs e)
@@ -92,6 +93,12 @@ namespace app
                     };
                 GradeViewSource.Source = query.ToList();
             }
+        }
+
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            SetGrades();
         }
     }
 }
