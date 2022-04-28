@@ -23,12 +23,12 @@ CREATE TABLE student_has_faculty (
     FOREIGN KEY ([student_id])
     REFERENCES student ([student_id])
     ON DELETE CASCADE
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT [fk_student_has_faculty1]
     FOREIGN KEY ([faculty_id])
     REFERENCES faculty ([faculty_id])
     ON DELETE CASCADE
-    ON UPDATE NO ACTION);
+    ON UPDATE CASCADE);
 
 DROP TABLE IF EXISTS [subject] ;
 CREATE TABLE subject (
@@ -45,25 +45,25 @@ CREATE TABLE student_has_subject (
   CONSTRAINT [fk_student_has_subject_student1]
     FOREIGN KEY ([student_id])
     REFERENCES student ([student_id])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT [fk_student_has_subject_subject1]
     FOREIGN KEY ([subject_id])
     REFERENCES subject ([subject_id])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
 DROP TABLE IF EXISTS [grade] ;
 CREATE TABLE grade (
   [grade_id] INT NOT NULL IDENTITY,
   [subject_id] INT NOT NULL,
-  [grade] INT NULL,
+  [grade_value] INT NULL,
   PRIMARY KEY ([grade_id]),
   CONSTRAINT [fk_grade_subject1]
     FOREIGN KEY ([subject_id])
     REFERENCES subject ([subject_id])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
 DROP TABLE IF EXISTS [student_has_grade] ;
 CREATE TABLE student_has_grade (
@@ -74,13 +74,13 @@ CREATE TABLE student_has_grade (
   CONSTRAINT [fk_student_has_grade_student1]
     FOREIGN KEY ([student_id])
     REFERENCES student ([student_id])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT [fk_student_has_grade_grade1]
     FOREIGN KEY ([grade_id])
     REFERENCES grade ([grade_id])
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
 
 
 INSERT INTO student VALUES ('Franta', 'Novak', 1);
@@ -94,10 +94,10 @@ INSERT INTO student VALUES ('Petr', 'Černý', 1);
 INSERT INTO student VALUES ('Šimon', 'Plachý', 1);
 INSERT INTO student VALUES ('Dominik', 'Nejezchleba', 1);
 
-INSERT INTO faculty VALUES ('Fakulta elektrotechniky', FEKT);
-INSERT INTO faculty VALUES ('Fakulta podnikatelksá', FP);
-INSERT INTO faculty VALUES ('Fakulta informatiky, FIT)
-INSERT INTO faculty VALUES ('Fakulta chemická, FCH);
+INSERT INTO faculty VALUES ('Fakulta elektrotechniky', 'FEKT');
+INSERT INTO faculty VALUES ('Fakulta podnikatelksá', 'FP');
+INSERT INTO faculty VALUES ('Fakulta informatiky', 'FIT')
+INSERT INTO faculty VALUES ('Fakulta chemická', 'FCH');
 
 INSERT INTO subject VALUES ('Datové struktury');
 INSERT INTO subject VALUES ('Biochemie');
@@ -197,16 +197,16 @@ INSERT INTO student_has_grade VALUES (7,7);
 INSERT INTO student_has_grade VALUES (8,8);
 INSERT INTO student_has_grade VALUES (9,9);
 INSERT INTO student_has_grade VALUES (10,10);
-INSERT INTO student_has_grade VALUES (11,11);
-INSERT INTO student_has_grade VALUES (12,12);
-INSERT INTO student_has_grade VALUES (13,13);
-INSERT INTO student_has_grade VALUES (14,14);
-INSERT INTO student_has_grade VALUES (15,15);
-INSERT INTO student_has_grade VALUES (16,16);
-INSERT INTO student_has_grade VALUES (17,17);
-INSERT INTO student_has_grade VALUES (18,18);
-INSERT INTO student_has_grade VALUES (19,19);
-INSERT INTO student_has_grade VALUES (20,20);
+INSERT INTO student_has_grade VALUES (1,11);
+INSERT INTO student_has_grade VALUES (2,12);
+INSERT INTO student_has_grade VALUES (3,13);
+INSERT INTO student_has_grade VALUES (4,14);
+INSERT INTO student_has_grade VALUES (5,15);
+INSERT INTO student_has_grade VALUES (6,16);
+INSERT INTO student_has_grade VALUES (7,17);
+INSERT INTO student_has_grade VALUES (8,18);
+INSERT INTO student_has_grade VALUES (9,19);
+INSERT INTO student_has_grade VALUES (10,20);
 INSERT INTO student_has_grade VALUES (1,21);
 INSERT INTO student_has_grade VALUES (2,22);
 INSERT INTO student_has_grade VALUES (3,23);
@@ -217,16 +217,16 @@ INSERT INTO student_has_grade VALUES (7,27);
 INSERT INTO student_has_grade VALUES (8,28);
 INSERT INTO student_has_grade VALUES (9,29);
 INSERT INTO student_has_grade VALUES (10,30);
-INSERT INTO student_has_grade VALUES (11,31);
-INSERT INTO student_has_grade VALUES (12,32);
-INSERT INTO student_has_grade VALUES (13,33);
-INSERT INTO student_has_grade VALUES (14,34);
-INSERT INTO student_has_grade VALUES (15,35);
-INSERT INTO student_has_grade VALUES (16,36);
-INSERT INTO student_has_grade VALUES (17,37);
-INSERT INTO student_has_grade VALUES (18,38);
-INSERT INTO student_has_grade VALUES (19,39);
-INSERT INTO student_has_grade VALUES (20,40);
+INSERT INTO student_has_grade VALUES (1,31);
+INSERT INTO student_has_grade VALUES (2,32);
+INSERT INTO student_has_grade VALUES (3,33);
+INSERT INTO student_has_grade VALUES (4,34);
+INSERT INTO student_has_grade VALUES (5,35);
+INSERT INTO student_has_grade VALUES (6,36);
+INSERT INTO student_has_grade VALUES (7,37);
+INSERT INTO student_has_grade VALUES (8,38);
+INSERT INTO student_has_grade VALUES (9,39);
+INSERT INTO student_has_grade VALUES (10,40);
 
 INSERT INTO student_has_faculty VALUES (1,1);
 INSERT INTO student_has_faculty VALUES (2,1);

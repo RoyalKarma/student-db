@@ -22,30 +22,29 @@ namespace app
     /// </summary>
     public partial class HomePage : Page
     {
-        UniDBEntities db = new UniDBEntities();
-        CollectionViewSource studentViewSource;
+        CollectionViewSource StudentViewSource;
         public List<student> Students { get; set; }
 
         public HomePage()
         {
             InitializeComponent();
-            studentViewSource = ((CollectionViewSource)(FindResource("studentViewSource")));
-            var query =
-                from s in db.students
-                join shasp in db.student_has_faculty on s.student_id equals shasp.student_id
-                join p in db.faculties on shasp.faculty_id equals p.faculty_id
-                select new
-                {
-                    student_id = s.student_id,
-                    first_name = s.first_name,
-                    last_name = s.last_name,
-                    year = s.year,
-                    abbrevation = p.abbrevation
-
-                };
-            DataContext = this;
-            db.students.Load();
-            studentViewSource.Source = query.ToList();
+            StudentViewSource = (CollectionViewSource)FindResource("StudentViewSource");
+            using (var context = new Entities())
+            {
+                var query =
+                    from s in context.students
+                    join shasp in context.student_has_faculty on s.student_id equals shasp.student_id
+                    join p in context.faculties on shasp.faculty_id equals p.faculty_id
+                    select new
+                    {
+                        student_id = s.student_id,
+                        first_name = s.first_name,
+                        last_name = s.last_name,
+                        year = s.year,
+                        abbrevation = p.abbrevation
+                    };
+                StudentViewSource.Source = query.ToList();
+            };
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -60,56 +59,64 @@ namespace app
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var query =
-                from s in db.students
-                join shasp in db.student_has_faculty on s.student_id equals shasp.student_id
-                join p in db.faculties on shasp.faculty_id equals p.faculty_id
-                where s.first_name.Contains(FilterBox.Text) | p.faculty_name.Contains(FilterBox.Text)//| s.last_name.Contains(FilterBox.Text) 
-                select new
-                {
-                    student_id = s.student_id,
-                    first_name = s.first_name,
-                    last_name = s.last_name,
-                    year = s.year,
-                    abbrevation = p.abbrevation
+            using (var context = new Entities())
+            {
+                var query =
+                    from s in context.students
+                    join shasp in context.student_has_faculty on s.student_id equals shasp.student_id
+                    join p in context.faculties on shasp.faculty_id equals p.faculty_id
+                    where s.first_name.Contains(FilterBox.Text) | s.last_name.Contains(FilterBox.Text) 
+                    select new
+                    {
+                        student_id = s.student_id,
+                        first_name = s.first_name,
+                        last_name = s.last_name,
+                        year = s.year,
+                        abbrevation = p.abbrevation
 
-                };
-            studentDataGrid.ItemsSource = query.ToList();
+                    };
+                StudentDataGrid.ItemsSource = query.ToList();
+            }
         }
 
         private void StudentInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            if (studentDataGrid.SelectedValue != null)
+            if (StudentDataGrid.SelectedValue != null)
             {
-                //NavigationService.Navigate(new StudentInfoPage(parseID()));
-                studentDataGrid.SelectedValue = null;
+                NavigationService.Navigate(new StudentInfoPage(ParseStudentID()));
+                StudentDataGrid.SelectedValue = null;
+                ShowStudentInfoButton.IsEnabled = false;
             }
         }
 
-        private int parseID()
+        private int ParseStudentID()
         {
-            string s = studentDataGrid.SelectedValue.ToString();
+            string s = StudentDataGrid.SelectedValue.ToString();
             s = s.Substring(1, s.Length - 2).Trim().Split(',')[0].Split('=')[1].Trim();
             return int.Parse(s);
         }
 
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            int id = parseID();
-            var student = (from s in db.students
-                           where s.student_id == id
-                           select s).SingleOrDefault();
-            db.students.Remove(student);
-            try { db.SaveChanges(); } catch { return; }
-            this.NavigationService.Refresh();
-            deleteButton.IsEnabled = false;
+            using (var context = new Entities())
+            {
+                int id = ParseStudentID();
+                var student = (from s in context.students
+                               where s.student_id == id
+                               select s).SingleOrDefault();
+                context.students.Remove(student);
+                try { context.SaveChanges(); } catch { return; }
+                NavigationService.Refresh();
+                DeleteButton.IsEnabled = false;
+            }
         }
 
-        private void studentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StudentDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (NavigationService != null)
             {
-                deleteButton.IsEnabled = true;
+                DeleteButton.IsEnabled = true;
+                ShowStudentInfoButton.IsEnabled = true;
             }
         }
     }

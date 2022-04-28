@@ -7,8 +7,20 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="500"
       Title="StudentInfoPage">
-
-    <Grid>
-        <DataGrid/>
+    <Page.Resources>
+        <CollectionViewSource x:Key="GradeViewSource"/>
+    </Page.Resources>
+    <Grid DataContext="{StaticResource GradeViewSource}">
+        <DataGrid x:Name="GradeDataGrid" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,10,10,47">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="grade_idColumn" Binding="{Binding grade_id}" Header="Grade ID" Width="Auto"/>
+                <DataGridTextColumn x:Name="grade_valueColumn" Binding="{Binding grade_value}" Header="Grade" Width="Auto"/>
+                <DataGridTextColumn x:Name="subject_nameColumn" Binding="{Binding subject_name}" Header="Subject" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="AddGradeButton" Margin="10,0,0,10" Height="32" Content="Add new grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Click="AddGradeButton_Click"/>
+        <Button x:Name="EditGradeButton" IsEnabled="False" Margin="115,0,0,10" Height="32" Content="Edit grade" HorizontalAlignment="Left" Width="80" VerticalAlignment="Bottom" Click="EditGradeButton_Click"/>
+        <Button x:Name="ReturnButton" Margin="0,0,10,10" Height="32" Content="Return" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="CancelButton_Click"/>
+        <Button x:Name="DeleteGradeButton" IsEnabled="False" Margin="200,0,0,10" Height="32" Content="Delete selected grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="135" Click="DeleteGradeButton_Click"/>
     </Grid>
 </Page>

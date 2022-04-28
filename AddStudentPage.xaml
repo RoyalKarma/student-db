@@ -7,24 +7,18 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="500"
       Title="AddStudentPage">
-    <Grid Width="500" Height="400">
-        <Button x:Name="addStudentButton" Content="Add student" HorizontalAlignment="Left"  Width="114" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click" Margin="10,0,0,10"/>
-        <Button x:Name="cancelButton" HorizontalAlignment="Right" Width="88" Height="32" VerticalAlignment="Bottom" Margin="0,0,10,10" Content="Cancel"/>
-        <Label Content="first name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="10,10,0,0"/>
-        <TextBox x:Name="first_nameTextBox" HorizontalAlignment="Left" Height="22" Text="{Binding first_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="125" Margin="89,14,0,0"/>
-        <Label Content="last name:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Margin="10,41,0,0"/>
-        <TextBox x:Name="last_nameTextBox" HorizontalAlignment="Left" Height="22" Text="{Binding last_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="125" Margin="89,45,0,0"/>
-        <Label Content="faculty id:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="10,72,0,0"/>
-        <Label Content="year:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="36" Margin="10,103,0,0"/>
-        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="24" Width="125" Text="{Binding year, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Margin="89,105,0,0"/>
-        <ComboBox x:Name="facultyIDBox" Margin="89,74,0,0" Height="24" Width="125" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <ComboBoxItem>
-                <TextBlock>FEKT</TextBlock>
-            </ComboBoxItem>
-            <ComboBoxItem>
-                <TextBlock>FP</TextBlock>
-            </ComboBoxItem>
-        </ComboBox>
+    <Grid>
+        <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left"  Width="114" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click" Margin="10,0,0,10"/>
+        <Button x:Name="ReturnButton" HorizontalAlignment="Right" Width="70" Height="32" VerticalAlignment="Bottom" Margin="0,0,10,10" Content="Return" Click="ReturnButton_Click"/>
+        <Label Content="First name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="74" Margin="10,10,0,0"/>
+        <TextBox x:Name="FirstNameTextBox" HorizontalAlignment="Left" Height="22" Text="" VerticalAlignment="Top" Width="150" Margin="89,14,0,0"/>
+        <Label Content="Last name" HorizontalAlignment="Left" VerticalAlignment="Top" Width="66" Margin="10,41,0,0"/>
+        <TextBox x:Name="LastNameTextBox" HorizontalAlignment="Left" Height="22" Text="" VerticalAlignment="Top" Width="150" Margin="89,45,0,0"/>
+        <Label Content="Faculty" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="10,72,0,0"/>
+        <Label Content="Year" HorizontalAlignment="Left" VerticalAlignment="Top" Width="36" Margin="10,103,0,0"/>
+        <TextBox x:Name="YearTextBox" HorizontalAlignment="Left" Height="24" Width="150" Text="" VerticalAlignment="Top" Margin="89,105,0,0"/>
+        <ComboBox x:Name="FacultyComboBox" Margin="89,74,0,0" Height="24" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
         <Popup Name="MyPopup"
                Placement="Mouse"
                HorizontalOffset="-50"

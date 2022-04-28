@@ -23,26 +23,31 @@ namespace app
         public AddStudentPage()
         {
             InitializeComponent();
+            using (var context = new Entities()) {
+                var faculties = context.faculties.Select(f => f.faculty_name);
+                FacultyComboBox.ItemsSource = faculties.ToList();
+            }
         }
         private void AddStudentButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var context = new UniDBEntities())
+            using (var context = new Entities())
             {
                 try
                 {
-                    student newStudent = new student()
+                    student student = new student()
                     {
-                        first_name = first_nameTextBox.Text,
-                        last_name = last_nameTextBox.Text,
-                        year = short.Parse(yearTextBox.Text),
+                        first_name = FirstNameTextBox.Text,
+                        last_name = LastNameTextBox.Text,
+                        year = short.Parse(YearTextBox.Text),
 
                     }; 
+                    var faculty = context.faculties.Where(f => f.faculty_name == FacultyComboBox.Text).Single();
                     student_has_faculty faculty_bind = new student_has_faculty()
                     {
-                        faculty_id = int.Parse(facultyIDBox.SelectedIndex.ToString()) + 1,
-                        student_id = newStudent.student_id
+                        faculty_id = faculty.faculty_id,
+                        student_id = student.student_id
                     };
-                    context.students.Add(newStudent);
+                    context.students.Add(student);
                     context.student_has_faculty.Add(faculty_bind);
                     context.SaveChanges();
                     MyPopup.IsOpen = true;
@@ -55,14 +60,14 @@ namespace app
 
         }
 
-        private void Show_Click(object sender, RoutedEventArgs e)
-        {
-            MyPopup.IsOpen = true;
-        }
-
         private void Hide_Click(object sender, RoutedEventArgs e)
         {
             MyPopup.IsOpen = false;
+        }
+
+        private void ReturnButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

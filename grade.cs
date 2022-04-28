@@ -22,7 +22,7 @@ namespace app
     
         public int grade_id { get; set; }
         public int subject_id { get; set; }
-        public Nullable<int> grade1 { get; set; }
+        public Nullable<int> grade_value { get; set; }
     
         public virtual subject subject { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

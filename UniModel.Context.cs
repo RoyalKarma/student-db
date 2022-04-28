@@ -13,10 +13,10 @@ namespace app
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UniDBEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public UniDBEntities()
-            : base("name=UniDBEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

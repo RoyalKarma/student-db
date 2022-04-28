@@ -68,7 +68,9 @@
           <Property Name="subject_name" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <Association Name="fk_grade_subject1">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="grade" Type="Self.grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="subject">
@@ -79,20 +81,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_student_has_faculty_program1">
-          <End Role="faculty" Type="Self.faculty" Multiplicity="1" />
-          <End Role="student_has_faculty" Type="Self.student_has_faculty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="faculty">
-              <PropertyRef Name="faculty_id" />
-            </Principal>
-            <Dependent Role="student_has_faculty">
-              <PropertyRef Name="faculty_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_student_has_faculty_student">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_faculty" Type="Self.student_has_faculty" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -103,8 +95,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_student_has_faculty1">
+          <End Role="faculty" Type="Self.faculty" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="student_has_faculty" Type="Self.student_has_faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="faculty">
+              <PropertyRef Name="faculty_id" />
+            </Principal>
+            <Dependent Role="student_has_faculty">
+              <PropertyRef Name="faculty_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_student_has_grade_grade1">
-          <End Role="grade" Type="Self.grade" Multiplicity="1" />
+          <End Role="grade" Type="Self.grade" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_grade" Type="Self.student_has_grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="grade">
@@ -116,7 +124,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_grade_student1">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_grade" Type="Self.student_has_grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -128,7 +138,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_subject_student1">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_subject" Type="Self.student_has_subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -140,7 +152,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_subject_subject1">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_subject" Type="Self.student_has_subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="subject">
@@ -163,12 +177,12 @@
             <End Role="subject" EntitySet="subject" />
             <End Role="grade" EntitySet="grade" />
           </AssociationSet>
-          <AssociationSet Name="fk_student_has_faculty_program1" Association="Self.fk_student_has_faculty_program1">
-            <End Role="faculty" EntitySet="faculty" />
-            <End Role="student_has_faculty" EntitySet="student_has_faculty" />
-          </AssociationSet>
           <AssociationSet Name="fk_student_has_faculty_student" Association="Self.fk_student_has_faculty_student">
             <End Role="student" EntitySet="student" />
+            <End Role="student_has_faculty" EntitySet="student_has_faculty" />
+          </AssociationSet>
+          <AssociationSet Name="fk_student_has_faculty1" Association="Self.fk_student_has_faculty1">
+            <End Role="faculty" EntitySet="faculty" />
             <End Role="student_has_faculty" EntitySet="student_has_faculty" />
           </AssociationSet>
           <AssociationSet Name="fk_student_has_grade_grade1" Association="Self.fk_student_has_grade_grade1">
@@ -200,7 +214,7 @@
           <Property Name="faculty_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="faculty_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="abbrevation" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="student_has_faculty" Relationship="Self.fk_student_has_faculty_program1" FromRole="faculty" ToRole="student_has_faculty" />
+          <NavigationProperty Name="student_has_faculty" Relationship="Self.fk_student_has_faculty1" FromRole="faculty" ToRole="student_has_faculty" />
         </EntityType>
         <EntityType Name="grade">
           <Key>
@@ -208,7 +222,7 @@
           </Key>
           <Property Name="grade_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="subject_id" Type="Int32" Nullable="false" />
-          <Property Name="grade1" Type="Int32" />
+          <Property Name="grade_value" Type="Int32" />
           <NavigationProperty Name="subject" Relationship="Self.fk_grade_subject1" FromRole="grade" ToRole="subject" />
           <NavigationProperty Name="student_has_grade" Relationship="Self.fk_student_has_grade_grade1" FromRole="grade" ToRole="student_has_grade" />
         </EntityType>
@@ -233,7 +247,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="student_id" Type="Int32" Nullable="false" />
           <Property Name="faculty_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="faculty" Relationship="Self.fk_student_has_faculty_program1" FromRole="student_has_faculty" ToRole="faculty" />
+          <NavigationProperty Name="faculty" Relationship="Self.fk_student_has_faculty1" FromRole="student_has_faculty" ToRole="faculty" />
           <NavigationProperty Name="student" Relationship="Self.fk_student_has_faculty_student" FromRole="student_has_faculty" ToRole="student" />
         </EntityType>
         <EntityType Name="student_has_grade">
@@ -269,8 +283,10 @@
           <NavigationProperty Name="grades" Relationship="Self.fk_grade_subject1" FromRole="subject" ToRole="grade" />
           <NavigationProperty Name="student_has_subject" Relationship="Self.fk_student_has_subject_subject1" FromRole="subject" ToRole="student_has_subject" />
         </EntityType>
-        <Association Name="fk_student_has_faculty_program1">
-          <End Role="faculty" Type="Self.faculty" Multiplicity="1" />
+        <Association Name="fk_student_has_faculty1">
+          <End Role="faculty" Type="Self.faculty" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_faculty" Type="Self.student_has_faculty" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="faculty">
@@ -282,7 +298,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_grade_subject1">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="grade" Type="Self.grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="subject">
@@ -294,7 +312,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_grade_grade1">
-          <End Role="grade" Type="Self.grade" Multiplicity="1" />
+          <End Role="grade" Type="Self.grade" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_grade" Type="Self.student_has_grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="grade">
@@ -306,7 +326,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_faculty_student">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_faculty" Type="Self.student_has_faculty" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -318,7 +340,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_grade_student1">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_grade" Type="Self.student_has_grade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -330,7 +354,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_subject_student1">
-          <End Role="student" Type="Self.student" Multiplicity="1" />
+          <End Role="student" Type="Self.student" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_subject" Type="Self.student_has_subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="student">
@@ -342,7 +368,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_student_has_subject_subject1">
-          <End Role="subject" Type="Self.subject" Multiplicity="1" />
+          <End Role="subject" Type="Self.subject" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="student_has_subject" Type="Self.student_has_subject" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="subject">
@@ -353,7 +381,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UniDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="faculties" EntityType="Self.faculty" />
           <EntitySet Name="grades" EntityType="Self.grade" />
           <EntitySet Name="students" EntityType="Self.student" />
@@ -361,7 +389,7 @@
           <EntitySet Name="student_has_grade" EntityType="Self.student_has_grade" />
           <EntitySet Name="student_has_subject" EntityType="Self.student_has_subject" />
           <EntitySet Name="subjects" EntityType="Self.subject" />
-          <AssociationSet Name="fk_student_has_faculty_program1" Association="Self.fk_student_has_faculty_program1">
+          <AssociationSet Name="fk_student_has_faculty1" Association="Self.fk_student_has_faculty1">
             <End Role="faculty" EntitySet="faculties" />
             <End Role="student_has_faculty" EntitySet="student_has_faculty" />
           </AssociationSet>
@@ -395,7 +423,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UniDBModelStoreContainer" CdmEntityContainer="UniDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="UniDBModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="faculties">
             <EntityTypeMapping TypeName="UniDBModel.faculty">
               <MappingFragment StoreEntitySet="faculty">
@@ -410,7 +438,7 @@
               <MappingFragment StoreEntitySet="grade">
                 <ScalarProperty Name="grade_id" ColumnName="grade_id" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="grade1" ColumnName="grade" />
+                <ScalarProperty Name="grade_value" ColumnName="grade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

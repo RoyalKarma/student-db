@@ -5,29 +5,27 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:app"
       mc:Ignorable="d" 
-      
       d:DesignHeight="400" d:DesignWidth="500"
       Title="Home">
     <Page.Resources>
-        <CollectionViewSource x:Key="studentViewSource" d:DesignSource="{d:DesignInstance {x:Type local:student}, CreateList=True}"/>
+        <CollectionViewSource x:Key="StudentViewSource"/>
     </Page.Resources>
 
-    <Grid DataContext="{StaticResource studentViewSource}">
+    <Grid DataContext="{StaticResource StudentViewSource}">
         <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click"/>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="50" Margin="0,0,10,10" Click="ExitButton_Click" Grid.Column="1"/>
-
-        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Margin="210,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="FilterBox_TextChanged" Grid.ColumnSpan="2"/>
-        <Button x:Name="StudentInfoButton" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click" Grid.ColumnSpan="2"/>
-        <Label Content="Filter by first name" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Height="28" Width="203"/>
-        <DataGrid x:Name="studentDataGrid" SelectionChanged="studentDataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,35,10,42" RowDetailsVisibilityMode="VisibleWhenSelected" CanUserDeleteRows="True" IsReadOnly="True">
+        <Button x:Name="DeleteButton" IsEnabled="False" Content="Delete selected student" Margin="250,0,0,10" Click="DeleteButton_Click" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150"/>
+        <Button x:Name="ShowStudentInfoButton" IsEnabled="False" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Margin="163,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="FilterBox_TextChanged"/>
+        <Label Content="Filter by student's name" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Height="28" Width="140"/>
+        <DataGrid x:Name="StudentDataGrid" SelectionChanged="StudentDataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,35,10,47" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="student_idColumn" Binding="{Binding student_id}" Header="student id" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="first name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="last_nameColumn" Binding="{Binding last_name}" Header="last name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="year" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="facultyColumn" Binding="{Binding abbrevation}" Header="faculty" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_idColumn" Binding="{Binding student_id}" Header="Student's ID" Width="Auto"/>
+                <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="Name" Width="Auto"/>
+                <DataGridTextColumn x:Name="last_nameColumn" Binding="{Binding last_name}" Header="Surname" Width="Auto"/>
+                <DataGridTextColumn x:Name="yearColumn" Binding="{Binding year}" Header="Year" Width="Auto"/>
+                <DataGridTextColumn x:Name="facultyColumn" Binding="{Binding abbrevation}" Header="Faculty" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="deleteButton" IsEnabled="False" Content="Delete selected student" Margin="250,0,0,10" Click="deleteButton_Click" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150"/>
     </Grid>
 </Page>
