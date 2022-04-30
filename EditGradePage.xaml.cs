@@ -20,36 +20,41 @@ namespace app
     /// </summary>
     public partial class EditGradePage : Page
     {
-        CollectionViewSource GradeViewSource;
-        private int GradeID { get; set; }
-        public EditGradePage(int GradeID)
-        {
-            this.GradeID = GradeID;
+        public EditGradePage(string gradeString)
+        { 
             InitializeComponent();
-            grade_idTextBox.Text = GradeID.ToString();
             using (var context = new Entities())
             {
                 var subjects = context.subjects.Select(s => s.subject_name);
                 subjectComboBox.ItemsSource = subjects.ToList();
             }
-
-
+            ParseDefaultsFromStr(gradeString);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new Entities())
             {
-                var query = context.grades.First(x => x.grade_id == GradeID);
-               
-                query.grade_value = int.Parse(grade_valueTextBox.Text);
-                var subject = context.subjects.Where(s => s.subject_name == subjectComboBox.Text).Single();
-                query.subject_id = subject.subject_id;
-                context.SaveChanges();
-                
-
-
-
+                try
+                {
+                    var gradeId = int.Parse(grade_idLabel.Content.ToString());
+                    var query = context.grades.First(x => x.grade_id == gradeId);
+                    var gradeValue = int.Parse(grade_valueTextBox.Text);
+                    if (gradeValue > 5 || gradeValue < 1) {
+                        throw new FormatException();
+                    }
+                    query.grade_value = gradeValue;
+                    var subject = context.subjects.Where(s => s.subject_name == subjectComboBox.Text).Single();
+                    query.subject_id = subject.subject_id;
+                    context.SaveChanges();
+                    PopupTextBlock.Text = "Grade edited successfully";
+                    GradeEditPopup.IsOpen = true;
+                }
+                catch (FormatException) {
+                    PopupTextBlock.Text = "Please input valid grade (1-5)";
+                    GradeEditPopup.IsOpen = true;
+                    return;
+                }
             }
 
         }
@@ -57,6 +62,19 @@ namespace app
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void ParseDefaultsFromStr(string str)
+        {
+            var s = str.Substring(1, str.Length - 2).Trim().Split(',');
+            grade_idLabel.Content = s[0].Split('=')[1].Trim();
+            grade_valueTextBox.Text = s[1].Split('=')[1].Trim();
+            subjectComboBox.SelectedValue = s[2].Split('=')[1].Trim();
+        }
+
+        private void Hide_Click(object sender, RoutedEventArgs e)
+        {
+            GradeEditPopup.IsOpen = false;
         }
     }
 }

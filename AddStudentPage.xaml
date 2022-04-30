@@ -19,7 +19,7 @@
         <TextBox x:Name="YearTextBox" HorizontalAlignment="Left" Height="24" Width="150" Text="" VerticalAlignment="Top" Margin="89,105,0,0"/>
         <ComboBox x:Name="FacultyComboBox" Margin="89,74,0,0" Height="24" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
-        <Popup Name="MyPopup"
+        <Popup Name="AddStudentPopup"
                Placement="Mouse"
                HorizontalOffset="-50"
                VerticalOffset="-50"
@@ -30,7 +30,7 @@
                         <RowDefinition Height="173*"/>
                         <RowDefinition Height="52*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Student added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
+                    <TextBlock x:Name="PopupTextBlock" Text="Student added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
                     <Button Click="Hide_Click" Margin="92,0,0,45" HorizontalAlignment="Left" Width="142" Height="65" VerticalAlignment="Bottom" Grid.RowSpan="2">Hide</Button>
                 </Grid>
             </Border>

@@ -17,7 +17,7 @@
         <ComboBox x:Name="SubjectsComboBox" Margin="83,104,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100"/>
         <Button x:Name="AddGradeButton" Content="Add Grade" Margin="10,0,0,10" Height="32" Click="AddGradeButton_Click" HorizontalAlignment="Left" Width="90" VerticalAlignment="Bottom"/>
         <Button x:Name="ReturnButton" Content="Return" Height="32" Margin="0,0,10,10" Click="ReturnButton_Click" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom"/>
-        <Popup Name="MyPopup"
+        <Popup Name="AddGradePopup"
                Placement="Mouse"
                HorizontalOffset="-50"
                VerticalOffset="-50"
@@ -28,7 +28,7 @@
                         <RowDefinition Height="173*"/>
                         <RowDefinition Height="52*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Student added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
+                    <TextBlock x:Name="PopupTextBlock" Text="Grade added succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
                     <Button Click="Hide_Click" Margin="92,0,0,45" HorizontalAlignment="Left" Width="142" Height="65" VerticalAlignment="Bottom" Grid.RowSpan="2">Hide</Button>
                 </Grid>
             </Border>

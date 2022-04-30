@@ -8,29 +8,33 @@
       d:DesignHeight="400" d:DesignWidth="500"
       Title="EditGradePage">
     <Page.Resources>
-        <CollectionViewSource x:Key="gradeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:grade}, CreateList=True}"/>
+        <CollectionViewSource x:Key="GradeViewSource"/>
     </Page.Resources>
 
-    <Grid>
-
+    <Grid DataContext="{StaticResource GradeViewSource}">
         <Button x:Name="SaveButton" Content="Save" Margin="10,0,0,10" Height="32" Click="SaveButton_Click" HorizontalAlignment="Left" Width="60" VerticalAlignment="Bottom"/>
         <Button x:Name="ReturnButton" Content="Return" Height="32" Margin="0,0,10,10" Click="ReturnButton_Click" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom"/>
-        <Grid x:Name="grid1" DataContext="{StaticResource gradeViewSource}" HorizontalAlignment="Left" Margin="121,150,0,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="grade id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <TextBox x:Name="grade_idTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="" VerticalAlignment="Center" Width="120"/>
-            <Label Content="grade value:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
-            <TextBox x:Name="grade_valueTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding grade_value, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
-            <Label Content="subject id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
-            <ComboBox x:Name="subjectComboBox" Margin="0.4,5,0,0" Height="24" Width="123" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1"/>
-        </Grid>
+        <Label Content="grade id:" Margin="10,10,0,364" HorizontalAlignment="Left" Width="60"/>
+        <Label x:Name="grade_idLabel" HorizontalAlignment="Left" Height="27" Margin="90,12,0,0" Grid.Row="0" VerticalAlignment="Top" Width="123"/>
+        <Label Content="grade value:" Margin="10,41,0,0" HorizontalAlignment="Left" Width="75" Height="29" VerticalAlignment="Top"/>
+        <TextBox x:Name="grade_valueTextBox" HorizontalAlignment="Left" Height="24" Margin="90,44,0,0" Text="" VerticalAlignment="Top" Width="123"/>
+        <Label Content="subject id:" Margin="10,75,0,0" HorizontalAlignment="Left" Width="84" Height="28" VerticalAlignment="Top"/>
+        <ComboBox x:Name="subjectComboBox" Margin="90,77,0,0" Height="24" Width="123" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Popup Name="GradeEditPopup"
+               Placement="Mouse"
+               HorizontalOffset="-50"
+               VerticalOffset="-50"
+               AllowsTransparency="True">
+            <Border BorderBrush="Black" BorderThickness="2">
+                <Grid Background="White" Width="333" Height="205"  >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="173*"/>
+                        <RowDefinition Height="52*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="PopupTextBlock" Text="Grade edited succesfully" Width="200" Height="200" Margin="92,72,0,-47" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Left" />
+                    <Button Click="Hide_Click" Margin="92,0,0,45" HorizontalAlignment="Left" Width="142" Height="65" VerticalAlignment="Bottom" Grid.RowSpan="2">Hide</Button>
+                </Grid>
+            </Border>
+        </Popup>
     </Grid>
 </Page>

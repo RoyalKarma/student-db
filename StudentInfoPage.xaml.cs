@@ -33,12 +33,13 @@ namespace app
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddGradePage(StudentID));
-            NavigationService.Refresh();
         }
 
         private void EditGradeButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new EditGradePage(ParseGradeID()));
+            Console.WriteLine(GradeDataGrid.SelectedItem); 
+            NavigationService.Navigate(new EditGradePage(GradeDataGrid.SelectedItem.ToString()));
+            SetGrades();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +55,7 @@ namespace app
                 var query = context.grades.Where(g => g.grade_id == id).SingleOrDefault();
                 context.grades.Remove(query);
                 try { context.SaveChanges(); } catch { return; }
-                //SetGrades();
+                SetGrades();
                 NavigationService.Refresh();
                 DeleteGradeButton.IsEnabled = false;
             }
@@ -97,8 +98,9 @@ namespace app
 
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-
             SetGrades();
+            DeleteGradeButton.IsEnabled = false;
+            EditGradeButton.IsEnabled = false;
         }
     }
 }

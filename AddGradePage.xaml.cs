@@ -39,6 +39,7 @@ namespace app
 
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine("Add");
             using (var context = new Entities())
             {
                 try
@@ -46,9 +47,14 @@ namespace app
                     var subjectName = SubjectsComboBox.SelectedItem.ToString();
                     Console.WriteLine(subjectName);
                     var subjectId = context.subjects.FirstOrDefault(s => s.subject_name == subjectName).subject_id;
+                    var gradeValue = int.Parse(GradeTextBox.Text);
+                    if (gradeValue > 5 || gradeValue < 1)
+                    {
+                        throw new FormatException();
+                    }
                     grade grade = new grade()
                     {
-                        grade_value = int.Parse(GradeTextBox.Text),
+                        grade_value = gradeValue,
                         subject_id = subjectId,
                     };
                     context.grades.Add(grade);
@@ -58,17 +64,20 @@ namespace app
                         student_id = StudentID
                     });
                     context.SaveChanges();
-                    MyPopup.IsOpen = true;
+                    PopupTextBlock.Text = "Grade successfully added";
+                    AddGradePopup.IsOpen = true;
                 }
-                catch
+                catch (FormatException)
                 {
+                    PopupTextBlock.Text = "Please input valid grade (1-5)";
+                    AddGradePopup.IsOpen = true;
                     return;
                 }
             }
         }
         private void Hide_Click(object sender, RoutedEventArgs e)
         {
-            MyPopup.IsOpen = false;
+            AddGradePopup.IsOpen = false;
         }
     }
 }

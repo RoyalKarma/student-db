@@ -34,12 +34,16 @@ namespace app
             {
                 try
                 {
+                    var year = short.Parse(YearTextBox.Text);
+                    if (year > 5 || year < 1)
+                    {
+                        throw new FormatException();
+                    }
                     student student = new student()
                     {
                         first_name = FirstNameTextBox.Text,
                         last_name = LastNameTextBox.Text,
-                        year = short.Parse(YearTextBox.Text),
-
+                        year = year,
                     }; 
                     var faculty = context.faculties.Where(f => f.faculty_name == FacultyComboBox.Text).Single();
                     student_has_faculty faculty_bind = new student_has_faculty()
@@ -50,10 +54,13 @@ namespace app
                     context.students.Add(student);
                     context.student_has_faculty.Add(faculty_bind);
                     context.SaveChanges();
-                    MyPopup.IsOpen = true;
+                    PopupTextBlock.Text = "Student successfully added";
+                    AddStudentPopup.IsOpen = true;
                 }
-                catch
+                catch (FormatException)
                 {
+                    PopupTextBlock.Text = "Please input valid study year (1-5)";
+                    AddStudentPopup.IsOpen = true;
                     return;
                 }
             }
@@ -62,7 +69,7 @@ namespace app
 
         private void Hide_Click(object sender, RoutedEventArgs e)
         {
-            MyPopup.IsOpen = false;
+            AddStudentPopup.IsOpen = false;
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
