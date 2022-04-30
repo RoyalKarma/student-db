@@ -93,6 +93,9 @@
     <Compile Include="EditGradePage.xaml.cs">
       <DependentUpon>EditGradePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditStudentPage.xaml.cs">
+      <DependentUpon>EditStudentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="faculty.cs">
       <DependentUpon>UniModel.tt</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditGradePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditStudentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

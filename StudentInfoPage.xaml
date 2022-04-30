@@ -11,7 +11,9 @@
         <CollectionViewSource x:Key="GradeViewSource"/>
     </Page.Resources>
     <Grid DataContext="{StaticResource GradeViewSource}">
-        <DataGrid x:Name="GradeDataGrid" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,10,10,47">
+        <Label x:Name="StudentNameLabel" HorizontalAlignment="Center" FontSize="24" Margin="0,10,0,0" Height="44" VerticalAlignment="Top"/>
+        <Separator Margin="10,45,10,0" Height="22" VerticalAlignment="Top"/>
+        <DataGrid x:Name="GradeDataGrid" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,79,10,47">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="grade_idColumn" Binding="{Binding grade_id}" Header="Grade ID" Width="Auto"/>
                 <DataGridTextColumn x:Name="grade_valueColumn" Binding="{Binding grade_value}" Header="Grade" Width="Auto"/>
@@ -22,6 +24,6 @@
         <Button x:Name="EditGradeButton" IsEnabled="False" Margin="115,0,0,10" Height="32" Content="Edit grade" HorizontalAlignment="Left" Width="80" VerticalAlignment="Bottom" Click="EditGradeButton_Click"/>
         <Button x:Name="ReturnButton" Margin="0,0,10,10" Height="32" Content="Return" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="CancelButton_Click"/>
         <Button x:Name="DeleteGradeButton" IsEnabled="False" Margin="200,0,0,10" Height="32" Content="Delete selected grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="135" Click="DeleteGradeButton_Click"/>
-        <Button x:Name="RefreshButton" Margin="0,0,85,10" Height="32" Content="refresh" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="RefreshButton_Click" RenderTransformOrigin="-0.074,0.425"/>
+        <Button x:Name="RefreshButton" Margin="0,0,85,10" Height="32" Content="Refresh" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="RefreshButton_Click" RenderTransformOrigin="-0.074,0.425"/>
     </Grid>
 </Page>

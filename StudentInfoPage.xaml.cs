@@ -26,6 +26,12 @@ namespace app
         {
             this.StudentID = StudentID;
             InitializeComponent();
+            using (var context = new Entities())
+            {
+                StudentNameLabel.Content = context.students.Where(
+                    s => s.student_id.Equals(StudentID)).Select(
+                    s => s.first_name + " " + s.last_name).Single().ToString();
+            }
             GradeViewSource = (CollectionViewSource)FindResource("GradeViewSource");
             SetGrades();
         }
@@ -40,6 +46,8 @@ namespace app
             Console.WriteLine(GradeDataGrid.SelectedItem); 
             NavigationService.Navigate(new EditGradePage(GradeDataGrid.SelectedItem.ToString()));
             SetGrades();
+            DeleteGradeButton.IsEnabled = false;
+            EditGradeButton.IsEnabled = false;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -58,6 +66,7 @@ namespace app
                 SetGrades();
                 NavigationService.Refresh();
                 DeleteGradeButton.IsEnabled = false;
+                EditGradeButton.IsEnabled = false;
             }
         }
 

@@ -147,6 +147,7 @@ namespace app
             {
                 DeleteButton.IsEnabled = true;
                 ShowStudentInfoButton.IsEnabled = true;
+                EditStudentButton.IsEnabled = true;
             }
         }
 
@@ -167,6 +168,13 @@ namespace app
             FilterFaculty.SelectedItem = null;
             DeleteButton.IsEnabled = false;
             ShowStudentInfoButton.IsEnabled = false;
+        }
+
+        private void EditStudentButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteButton.IsEnabled = false;
+            ShowStudentInfoButton.IsEnabled = false;
+            NavigationService.Navigate(new EditStudentPage(ParseStudentID()));
         }
     }
 }

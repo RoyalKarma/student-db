@@ -14,8 +14,8 @@
     <Grid DataContext="{StaticResource StudentViewSource}">
         <Button x:Name="AddStudentButton" Content="Add student" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Height="32" VerticalAlignment="Bottom" Click="AddStudentButton_Click"/>
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="50" Margin="0,0,10,10" Click="ExitButton_Click" Grid.Column="1"/>
-        <Button x:Name="DeleteButton" IsEnabled="False" Content="Delete selected student" Margin="250,0,0,10" Click="DeleteButton_Click" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150"/>
-        <Button x:Name="ShowStudentInfoButton" IsEnabled="False" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="DeleteButton" IsEnabled="False" Content="Delete student" Margin="239,0,0,10" Click="DeleteButton_Click" HorizontalAlignment="Left" Width="96" Height="32" VerticalAlignment="Bottom"/>
+        <Button x:Name="ShowStudentInfoButton" IsEnabled="False" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="119" Click="StudentInfoButton_Click" Height="32" VerticalAlignment="Bottom"/>
         <TextBox x:Name="FilterName" HorizontalAlignment="Left" Margin="102,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" TextChanged="FilterName_TextChanged" Height="21"/>
         <Label Content="Student's name" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Height="28" Width="92"/>
         <DataGrid x:Name="StudentDataGrid" SelectionChanged="StudentDataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,74,10,47" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
@@ -33,5 +33,6 @@
         <Label Content="Faculty" HorizontalAlignment="Left" Margin="290,32,0,0" VerticalAlignment="Top" Height="26"/>
         <ComboBox x:Name="FilterFaculty" HorizontalAlignment="Left" Margin="337,36,0,0" VerticalAlignment="Top" Width="59" Height="21" SelectionChanged="FilterFaculty_SelectionChanged"/>
         <Button x:Name="ClearFiltersButton" Content="Clear" Margin="0,35,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="41" Click="ClearButton_Click"/>
+        <Button x:Name="EditStudentButton" Content="Edit student" HorizontalAlignment="Left" Margin="340,0,0,10" Width="85" Height="32" VerticalAlignment="Bottom" Click="EditStudentButton_Click" IsEnabled="False"/>
     </Grid>
 </Page>
