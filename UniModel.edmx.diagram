@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a668818cfc54498f93edb33bfeed838c" Name="Diagram1">
-        <EntityTypeShape EntityType="UniDBModel.faculty" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.grade" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.student" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.student_has_faculty" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.student_has_grade" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.student_has_subject" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="UniDBModel.subject" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_faculty1" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_grade_subject1" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_grade_grade1" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_faculty_student" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_grade_student1" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_subject_student1" ManuallyRouted="false" />
-        <AssociationConnector Association="UniDBModel.fk_student_has_subject_subject1" ManuallyRouted="false" />
+      <Diagram DiagramId="502b280779374289b662a4a97af9d5f2" Name="Diagram1">
+        <EntityTypeShape EntityType="UniModel.faculty" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.grade" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.student" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.student_has_faculty" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.student_has_grade" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.student_has_subject" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniModel.subject" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="UniModel.fk_student_has_faculty1" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_grade_subject1" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_student_has_grade_grade1" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_student_has_faculty_student" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_student_has_grade_student1" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_student_has_subject_student1" ManuallyRouted="false" />
+        <AssociationConnector Association="UniModel.fk_student_has_subject_subject1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -228,8 +228,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="UniDB_log.ldf">
-      <DependentUpon>UniDB.mdf</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>UniDB.mdf</DependentUpon>
     </Content>
     <Content Include="UniModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

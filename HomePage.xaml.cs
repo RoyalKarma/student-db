@@ -44,6 +44,8 @@ namespace app
                         abbrevation = p.abbrevation
                     };
                 StudentViewSource.Source = query.ToList();
+                FilterYear.ItemsSource = new short[] { 1, 2, 3, 4, 5 };
+                FilterFaculty.ItemsSource = context.faculties.Select(f => f.abbrevation).ToList();
             };
         }
 
@@ -57,15 +59,36 @@ namespace app
             NavigationService.Navigate(new AddStudentPage());
         }
 
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void FilterName_TextChanged(object sender, TextChangedEventArgs e)
         {
+            RefreshShownStudents();
+        }
+
+        private void RefreshShownStudents() {
             using (var context = new Entities())
             {
+                bool hasYear = false;
+                bool hasFaculty = false;
+                short year = 0;
+                string faculty = "";
+                try
+                {
+                    var item = FilterYear.SelectedItem;
+                    if (item == null) throw new Exception();
+                    year = short.Parse(item.ToString());
+                    hasYear = true;
+                } catch { }
+                try {
+                    var item = FilterFaculty.SelectedItem;
+                    if (item == null) throw new Exception();
+                    faculty = item.ToString();
+                    hasFaculty = true;
+                } catch { }
                 var query =
                     from s in context.students
                     join shasp in context.student_has_faculty on s.student_id equals shasp.student_id
                     join p in context.faculties on shasp.faculty_id equals p.faculty_id
-                    where s.first_name.Contains(FilterBox.Text) | s.last_name.Contains(FilterBox.Text) 
+                    where s.first_name.Contains(FilterName.Text) | s.last_name.Contains(FilterName.Text)
                     select new
                     {
                         student_id = s.student_id,
@@ -75,6 +98,13 @@ namespace app
                         abbrevation = p.abbrevation
 
                     };
+                if (hasYear) {
+                    query = query.Where(s => s.year.Equals(year));
+                }
+                if (hasFaculty)
+                {
+                    query = query.Where(s => s.abbrevation.Equals(faculty));
+                }
                 StudentDataGrid.ItemsSource = query.ToList();
             }
         }
@@ -118,6 +148,25 @@ namespace app
                 DeleteButton.IsEnabled = true;
                 ShowStudentInfoButton.IsEnabled = true;
             }
+        }
+
+        private void FilterYear_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshShownStudents();
+        }
+
+        private void FilterFaculty_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshShownStudents();
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            FilterName.Text = string.Empty;
+            FilterYear.SelectedItem = null;
+            FilterFaculty.SelectedItem = null;
+            DeleteButton.IsEnabled = false;
+            ShowStudentInfoButton.IsEnabled = false;
         }
     }
 }

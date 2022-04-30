@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UniDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="UniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="faculty">
           <Key>
             <PropertyRef Name="faculty_id" />
@@ -19,7 +19,7 @@
           </Key>
           <Property Name="grade_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="subject_id" Type="int" Nullable="false" />
-          <Property Name="grade" Type="int" />
+          <Property Name="grade_value" Type="int" />
         </EntityType>
         <EntityType Name="student">
           <Key>
@@ -165,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UniDBModelStoreContainer">
+        <EntityContainer Name="UniModelStoreContainer">
           <EntitySet Name="faculty" EntityType="Self.faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
@@ -206,7 +206,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="UniDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="UniModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="faculty">
           <Key>
             <PropertyRef Name="faculty_id" />
@@ -423,9 +423,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UniDBModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="UniModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="faculties">
-            <EntityTypeMapping TypeName="UniDBModel.faculty">
+            <EntityTypeMapping TypeName="UniModel.faculty">
               <MappingFragment StoreEntitySet="faculty">
                 <ScalarProperty Name="faculty_id" ColumnName="faculty_id" />
                 <ScalarProperty Name="faculty_name" ColumnName="faculty_name" />
@@ -434,16 +434,16 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="grades">
-            <EntityTypeMapping TypeName="UniDBModel.grade">
+            <EntityTypeMapping TypeName="UniModel.grade">
               <MappingFragment StoreEntitySet="grade">
                 <ScalarProperty Name="grade_id" ColumnName="grade_id" />
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
-                <ScalarProperty Name="grade_value" ColumnName="grade" />
+                <ScalarProperty Name="grade_value" ColumnName="grade_value" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="students">
-            <EntityTypeMapping TypeName="UniDBModel.student">
+            <EntityTypeMapping TypeName="UniModel.student">
               <MappingFragment StoreEntitySet="student">
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
@@ -453,7 +453,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="student_has_faculty">
-            <EntityTypeMapping TypeName="UniDBModel.student_has_faculty">
+            <EntityTypeMapping TypeName="UniModel.student_has_faculty">
               <MappingFragment StoreEntitySet="student_has_faculty">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
@@ -462,7 +462,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="student_has_grade">
-            <EntityTypeMapping TypeName="UniDBModel.student_has_grade">
+            <EntityTypeMapping TypeName="UniModel.student_has_grade">
               <MappingFragment StoreEntitySet="student_has_grade">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
@@ -471,7 +471,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="student_has_subject">
-            <EntityTypeMapping TypeName="UniDBModel.student_has_subject">
+            <EntityTypeMapping TypeName="UniModel.student_has_subject">
               <MappingFragment StoreEntitySet="student_has_subject">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />
@@ -480,7 +480,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="subjects">
-            <EntityTypeMapping TypeName="UniDBModel.subject">
+            <EntityTypeMapping TypeName="UniModel.subject">
               <MappingFragment StoreEntitySet="subject">
                 <ScalarProperty Name="subject_id" ColumnName="subject_id" />
                 <ScalarProperty Name="subject_name" ColumnName="subject_name" />

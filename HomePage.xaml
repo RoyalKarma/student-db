@@ -16,9 +16,9 @@
         <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="32" Width="50" Margin="0,0,10,10" Click="ExitButton_Click" Grid.Column="1"/>
         <Button x:Name="DeleteButton" IsEnabled="False" Content="Delete selected student" Margin="250,0,0,10" Click="DeleteButton_Click" Height="32" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150"/>
         <Button x:Name="ShowStudentInfoButton" IsEnabled="False" Content="Show student info" HorizontalAlignment="Left" Margin="115,0,0,10" Width="130" VerticalAlignment="Bottom" Height="32" Click="StudentInfoButton_Click" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="FilterBox" HorizontalAlignment="Left" Margin="163,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="FilterBox_TextChanged"/>
-        <Label Content="Filter by student's name" HorizontalAlignment="Left" Margin="18,2,0,0" VerticalAlignment="Top" Height="28" Width="140"/>
-        <DataGrid x:Name="StudentDataGrid" SelectionChanged="StudentDataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,35,10,47" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
+        <TextBox x:Name="FilterName" HorizontalAlignment="Left" Margin="102,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" TextChanged="FilterName_TextChanged" Height="21"/>
+        <Label Content="Student's name" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Height="28" Width="92"/>
+        <DataGrid x:Name="StudentDataGrid" SelectionChanged="StudentDataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,74,10,47" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="student_idColumn" Binding="{Binding student_id}" Header="Student's ID" Width="Auto"/>
                 <DataGridTextColumn x:Name="first_nameColumn" Binding="{Binding first_name}" Header="Name" Width="Auto"/>
@@ -27,5 +27,11 @@
                 <DataGridTextColumn x:Name="facultyColumn" Binding="{Binding abbrevation}" Header="Faculty" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="Year" HorizontalAlignment="Left" Margin="207,31,0,0" VerticalAlignment="Top" Width="36"/>
+        <Label Content="Filters" Margin="163,1,163,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        <ComboBox x:Name="FilterYear" HorizontalAlignment="Left" Margin="243,36,0,0" VerticalAlignment="Top" Width="42" Height="21" SelectionChanged="FilterYear_SelectionChanged"/>
+        <Label Content="Faculty" HorizontalAlignment="Left" Margin="290,32,0,0" VerticalAlignment="Top" Height="26"/>
+        <ComboBox x:Name="FilterFaculty" HorizontalAlignment="Left" Margin="337,36,0,0" VerticalAlignment="Top" Width="59" Height="21" SelectionChanged="FilterFaculty_SelectionChanged"/>
+        <Button x:Name="ClearFiltersButton" Content="Clear" Margin="0,35,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="41" Click="ClearButton_Click"/>
     </Grid>
 </Page>
