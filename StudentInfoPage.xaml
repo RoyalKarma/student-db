@@ -20,10 +20,12 @@
                 <DataGridTextColumn x:Name="subject_nameColumn" Binding="{Binding subject_name}" Header="Subject" Width="Auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="AddGradeButton" Margin="10,0,0,10" Height="32" Content="Add new grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Click="AddGradeButton_Click"/>
-        <Button x:Name="EditGradeButton" IsEnabled="False" Margin="115,0,0,10" Height="32" Content="Edit grade" HorizontalAlignment="Left" Width="80" VerticalAlignment="Bottom" Click="EditGradeButton_Click"/>
+        <Button x:Name="AddGradeButton" Margin="10,0,0,10" Height="32" Content="Add new grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Click="AddGradeButton_Click" />
+        <Button x:Name="EditGradeButton"  Margin="115,0,0,10" Height="32" Content="Edit grade" HorizontalAlignment="Left" Width="80" VerticalAlignment="Bottom" Click="EditGradeButton_Click" IsEnabled="False" />
         <Button x:Name="ReturnButton" Margin="0,0,10,10" Height="32" Content="Return" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="CancelButton_Click"/>
         <Button x:Name="DeleteGradeButton" IsEnabled="False" Margin="200,0,0,10" Height="32" Content="Delete selected grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="135" Click="DeleteGradeButton_Click"/>
-        <Button x:Name="RefreshButton" Margin="0,0,85,10" Height="32" Content="Refresh" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="RefreshButton_Click" RenderTransformOrigin="-0.074,0.425"/>
+        <Button x:Name="RefreshButton" Margin="0,0,85,10" Height="32" Content="Refresh" HorizontalAlignment="Right" Width="75" VerticalAlignment="Bottom" Click="RefreshButton_Click" RenderTransformOrigin="-0.074,0.425"/>
+        <TextBox x:Name="AverageGradeBox" Margin="0,22,13,0" Height="23"  HorizontalAlignment="Right" Width="75" VerticalAlignment="Top"  RenderTransformOrigin="-0.074,0.425"/>
+        <Label Content="Average grade" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="0,21,93,0"></Label>
     </Grid>
 </Page>

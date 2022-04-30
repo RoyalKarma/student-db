@@ -35,12 +35,15 @@ namespace app
             }
             GradeViewSource = (CollectionViewSource)FindResource("GradeViewSource");
             SetGrades();
+            GetAvgGrade();
             GradeDataGrid.SelectedIndex = -1;
         }
 
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddGradePage(StudentID));
+            
+            
         }
 
         private void EditGradeButton_Click(object sender, RoutedEventArgs e)
@@ -48,8 +51,7 @@ namespace app
             Console.WriteLine(GradeDataGrid.SelectedItem); 
             NavigationService.Navigate(new EditGradePage(GradeDataGrid.SelectedItem.ToString()));
             SetGrades();
-            DeleteGradeButton.IsEnabled = false;
-            EditGradeButton.IsEnabled = false;
+ 
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -67,8 +69,10 @@ namespace app
                 try { context.SaveChanges(); } catch { return; }
                 SetGrades();
                 NavigationService.Refresh();
+                GradeDataGrid.SelectedIndex = -1;   
                 DeleteGradeButton.IsEnabled = false;
                 EditGradeButton.IsEnabled = false;
+                
             }
         }
 
@@ -88,6 +92,25 @@ namespace app
             return int.Parse(s);
         }
 
+        private void GetAvgGrade()
+        {
+            using(var context = new Entities())
+            {
+                var query = from g in context.grades
+                            join shasg in context.student_has_grade on g.grade_id equals shasg.grade_id
+                            join s in context.students on shasg.student_id equals s.student_id
+                            join sub in context.subjects on g.subject_id equals sub.subject_id
+                            where s.student_id == StudentID
+                            select new
+                            {                              
+                                grade_value = g.grade_value   
+                            };
+                var res = query.Average(g => g.grade_value);
+                    
+                AverageGradeBox.Text = res.ToString();
+            }
+        }
+
         private void SetGrades() {
             using (var context = new Entities())
             {
@@ -103,16 +126,23 @@ namespace app
                         grade_value = g.grade_value,
                         subject_name = sub.subject_name,
                     };
+
                 GradeViewSource.Source = query.ToList();
             }
         }
 
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        private void RefreshButton_Click(object sender, RoutedEventArgs e) //clunky af
         {
             SetGrades();
+            GradeDataGrid.SelectedIndex = -1; //pobodám vole fakt
             DeleteGradeButton.IsEnabled = false;
             EditGradeButton.IsEnabled = false;
-            GradeDataGrid.SelectedIndex = -1;
+            
+           
+
         }
+        
+
+
     }
 }
