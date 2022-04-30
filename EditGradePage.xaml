@@ -12,14 +12,16 @@
     </Page.Resources>
 
     <Grid DataContext="{StaticResource GradeViewSource}">
+        <Label Content="Edit Grade" HorizontalAlignment="Center" FontSize="24" Margin="0,10,0,0" Height="44" VerticalAlignment="Top"/>
+        <Separator Margin="10,45,10,0" Height="22" VerticalAlignment="Top"/>
         <Button x:Name="SaveButton" Content="Save" Margin="10,0,0,10" Height="32" Click="SaveButton_Click" HorizontalAlignment="Left" Width="60" VerticalAlignment="Bottom"/>
         <Button x:Name="ReturnButton" Content="Return" Height="32" Margin="0,0,10,10" Click="ReturnButton_Click" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom"/>
-        <Label Content="grade id:" Margin="10,10,0,364" HorizontalAlignment="Left" Width="60"/>
-        <Label x:Name="grade_idLabel" HorizontalAlignment="Left" Height="27" Margin="90,12,0,0" Grid.Row="0" VerticalAlignment="Top" Width="123"/>
-        <Label Content="grade value:" Margin="10,41,0,0" HorizontalAlignment="Left" Width="75" Height="29" VerticalAlignment="Top"/>
-        <TextBox x:Name="grade_valueTextBox" HorizontalAlignment="Left" Height="24" Margin="90,44,0,0" Text="" VerticalAlignment="Top" Width="123"/>
-        <Label Content="subject id:" Margin="10,75,0,0" HorizontalAlignment="Left" Width="84" Height="28" VerticalAlignment="Top"/>
-        <ComboBox x:Name="subjectComboBox" Margin="90,77,0,0" Height="24" Width="123" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="grade id:" Margin="10,74,0,300" HorizontalAlignment="Left" Width="60"/>
+        <Label x:Name="grade_idLabel" HorizontalAlignment="Left" Height="27" Margin="94,76,0,0" Grid.Row="0" VerticalAlignment="Top" Width="122"/>
+        <Label Content="grade value:" Margin="10,105,0,0" HorizontalAlignment="Left" Width="74" Height="29" VerticalAlignment="Top"/>
+        <TextBox x:Name="grade_valueTextBox" HorizontalAlignment="Left" Height="24" Margin="94,108,0,0" Text="" VerticalAlignment="Top" Width="122"/>
+        <Label Content="subject id:" Margin="10,139,0,0" HorizontalAlignment="Left" Width="84" Height="28" VerticalAlignment="Top"/>
+        <ComboBox x:Name="subjectComboBox" Margin="94,141,0,0" Height="24" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Popup Name="GradeEditPopup"
                Placement="Mouse"
                HorizontalOffset="-50"
