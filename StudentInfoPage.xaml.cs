@@ -22,6 +22,7 @@ namespace app
     {
         CollectionViewSource GradeViewSource;
         private int StudentID { get; set; }
+        private bool FirstTime { get; set; }
         public StudentInfoPage(int StudentID)
         {
             this.StudentID = StudentID;
@@ -34,6 +35,7 @@ namespace app
             }
             GradeViewSource = (CollectionViewSource)FindResource("GradeViewSource");
             SetGrades();
+            GradeDataGrid.SelectedIndex = -1;
         }
 
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
@@ -110,6 +112,7 @@ namespace app
             SetGrades();
             DeleteGradeButton.IsEnabled = false;
             EditGradeButton.IsEnabled = false;
+            GradeDataGrid.SelectedIndex = -1;
         }
     }
 }

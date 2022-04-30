@@ -44,6 +44,7 @@ namespace app
                         abbrevation = p.abbrevation
                     };
                 StudentViewSource.Source = query.ToList();
+                StudentDataGrid.SelectedIndex = -1;
                 FilterYear.ItemsSource = new short[] { 1, 2, 3, 4, 5 };
                 FilterFaculty.ItemsSource = context.faculties.Select(f => f.abbrevation).ToList();
             };
