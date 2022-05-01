@@ -9,15 +9,11 @@ using System.Linq;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for home.xaml
-    /// </summary>
     public partial class HomeWindow : Window
     {
-       public HomeWindow()
+        public HomeWindow()
         {
             InitializeComponent();
         }
-       
     }
 }

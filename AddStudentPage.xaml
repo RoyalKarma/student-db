@@ -18,7 +18,7 @@
         <TextBox x:Name="LastNameTextBox" HorizontalAlignment="Left" Height="22" Text="" VerticalAlignment="Top" Width="150" Margin="77,103,0,0"/>
         <Label Content="Faculty" HorizontalAlignment="Left" VerticalAlignment="Top" Width="62" Margin="10,130,0,0"/>
         <Label Content="Year" HorizontalAlignment="Left" VerticalAlignment="Top" Width="36" Margin="10,161,0,0"/>
-        <TextBox x:Name="YearTextBox" HorizontalAlignment="Left" Height="24" Width="150" Text="" VerticalAlignment="Top" Margin="77,163,0,0"/>
+        <ComboBox x:Name="YearComboBox" HorizontalAlignment="Left" Height="24" Width="150" Text="" VerticalAlignment="Top" Margin="77,163,0,0"/>
         <ComboBox x:Name="FacultyComboBox" Margin="77,132,0,0" Height="24" Width="150" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         <Popup Name="AddStudentPopup"

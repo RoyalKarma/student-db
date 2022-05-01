@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for AddGradePage.xaml
-    /// </summary>
     public partial class AddGradePage : Page
     {
         private int StudentID { get; set; }
@@ -29,6 +26,7 @@ namespace app
             {
                 var subjects = context.subjects.Select(s => s.subject_name);
                 SubjectsComboBox.ItemsSource = subjects.ToList();
+                GradeComboBox.ItemsSource = Grades.GradeList;
             }
         }
 
@@ -47,11 +45,7 @@ namespace app
                     var subjectName = SubjectsComboBox.SelectedItem.ToString();
                     Console.WriteLine(subjectName);
                     var subjectId = context.subjects.FirstOrDefault(s => s.subject_name == subjectName).subject_id;
-                    var gradeValue = int.Parse(GradeTextBox.Text);
-                    if (gradeValue > 5 || gradeValue < 1)
-                    {
-                        throw new FormatException();
-                    }
+                    var gradeValue = int.Parse(GradeComboBox.Text);
                     grade grade = new grade()
                     {
                         grade_value = gradeValue,

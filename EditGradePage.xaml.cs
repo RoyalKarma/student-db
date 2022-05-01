@@ -15,18 +15,16 @@ using System.Windows.Shapes;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for EditGradePage.xaml
-    /// </summary>
     public partial class EditGradePage : Page
     {
         public EditGradePage(string gradeString)
-        { 
+        {
             InitializeComponent();
             using (var context = new Entities())
             {
                 var subjects = context.subjects.Select(s => s.subject_name);
                 subjectComboBox.ItemsSource = subjects.ToList();
+                grade_valueComboBox.ItemsSource = Grades.GradeList;
             }
             ParseDefaultsFromStr(gradeString);
         }
@@ -39,10 +37,7 @@ namespace app
                 {
                     var gradeId = int.Parse(grade_idLabel.Content.ToString());
                     var query = context.grades.First(x => x.grade_id == gradeId);
-                    var gradeValue = int.Parse(grade_valueTextBox.Text);
-                    if (gradeValue > 5 || gradeValue < 1) {
-                        throw new FormatException();
-                    }
+                    var gradeValue = int.Parse(grade_valueComboBox.Text);
                     query.grade_value = gradeValue;
                     var subject = context.subjects.Where(s => s.subject_name == subjectComboBox.Text).Single();
                     query.subject_id = subject.subject_id;
@@ -50,13 +45,13 @@ namespace app
                     PopupTextBlock.Text = "Grade edited successfully";
                     GradeEditPopup.IsOpen = true;
                 }
-                catch (FormatException) {
+                catch (FormatException)
+                {
                     PopupTextBlock.Text = "Please input valid grade (1-5)";
                     GradeEditPopup.IsOpen = true;
                     return;
                 }
             }
-
         }
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
@@ -68,7 +63,7 @@ namespace app
         {
             var s = str.Substring(1, str.Length - 2).Trim().Split(',');
             grade_idLabel.Content = s[0].Split('=')[1].Trim();
-            grade_valueTextBox.Text = s[1].Split('=')[1].Trim();
+            grade_valueComboBox.Text = s[1].Split('=')[1].Trim();
             subjectComboBox.SelectedValue = s[2].Split('=')[1].Trim();
         }
 

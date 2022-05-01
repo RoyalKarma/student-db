@@ -15,14 +15,10 @@ using System.Windows.Shapes;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for StudentInfoPage.xaml
-    /// </summary>
     public partial class StudentInfoPage : Page
     {
         CollectionViewSource GradeViewSource;
         private int StudentID { get; set; }
-        private bool FirstTime { get; set; }
         public StudentInfoPage(int StudentID)
         {
             this.StudentID = StudentID;
@@ -32,20 +28,21 @@ namespace app
                 StudentNameLabel.Content = context.students.Where(
                     s => s.student_id.Equals(StudentID)).Select(
                     s => s.first_name + " " + s.last_name).Single().ToString();
+                FilterGradeComboBox.ItemsSource = Grades.GradeList;
             }
             GradeViewSource = (CollectionViewSource)FindResource("GradeViewSource");
-            SetGrades();         
+            SetGrades();
             SetState();
         }
 
         private void AddGradeButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddGradePage(StudentID));          
+            NavigationService.Navigate(new AddGradePage(StudentID));
         }
 
         private void EditGradeButton_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(GradeDataGrid.SelectedItem); 
+            Console.WriteLine(GradeDataGrid.SelectedItem);
             NavigationService.Navigate(new EditGradePage(GradeDataGrid.SelectedItem.ToString()));
             SetGrades();
         }
@@ -63,8 +60,8 @@ namespace app
                 var query = context.grades.Where(g => g.grade_id == id).SingleOrDefault();
                 context.grades.Remove(query);
                 try { context.SaveChanges(); } catch { return; }
-                SetGrades();               
-                SetState();               
+                SetGrades();
+                SetState();
             }
         }
 
@@ -84,9 +81,8 @@ namespace app
             return int.Parse(s);
         }
 
-       
-
-        private void SetGrades() {
+        private void SetGrades()
+        {
             using (var context = new Entities())
             {
                 var query =
@@ -102,8 +98,8 @@ namespace app
                         subject_name = sub.subject_name,
                     };
                 var res = query.Average(g => g.grade_value);
-                AverageGradeBox.Text = res.ToString();
-
+                if (res == null) AverageGradeBox.Content = "0.00";
+                else AverageGradeBox.Content = Math.Round((double)res, 2);
                 GradeViewSource.Source = query.ToList();
             }
         }
@@ -112,21 +108,59 @@ namespace app
         {
             SetGrades();
             SetState();
-           /* GradeDataGrid.SelectedIndex = -1; //pobodám vole fakt
-            DeleteGradeButton.IsEnabled = false;
-            EditGradeButton.IsEnabled = false;*/
-            
-           
-
         }
+
         private void SetState()
         {
             GradeDataGrid.SelectedIndex = -1;
             DeleteGradeButton.IsEnabled = false;
             EditGradeButton.IsEnabled = false;
         }
-        
 
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Refresh();
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            FilterGradeComboBox.SelectedIndex = -1;
+            FilterSubjectTextBox.Text = "";
+            Refresh();
+        }
+
+        private void FilterGradeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void Refresh() {
+            using (var context = new Entities())
+            {
+                var query =
+                    from g in context.grades
+                    join shasg in context.student_has_grade on g.grade_id equals shasg.grade_id
+                    join s in context.students on shasg.student_id equals s.student_id
+                    join sub in context.subjects on g.subject_id equals sub.subject_id
+                    where s.student_id == StudentID & sub.subject_name.Contains(FilterSubjectTextBox.Text)
+                    select new
+                    {
+                        grade_id = g.grade_id,
+                        grade_value = g.grade_value,
+                        subject_name = sub.subject_name,
+                    };
+                if (FilterGradeComboBox.Text == "")
+                {
+                    GradeViewSource.Source = query.ToList();
+                }
+                else {
+                    var grade = short.Parse(FilterGradeComboBox.Text);
+                    GradeViewSource.Source = query.Where(g => g.grade_value.Equals(grade)).ToList();
+                }
+                var res = query.Average(g => g.grade_value);
+                if (res == null) AverageGradeBox.Content = "0.00";
+                else AverageGradeBox.Content = Math.Round((double)res, 2);
+            }
+        }
     }
 }

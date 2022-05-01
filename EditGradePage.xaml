@@ -19,9 +19,9 @@
         <Label Content="Grade id:" Margin="10,74,0,300" HorizontalAlignment="Left" Width="60"/>
         <Label x:Name="grade_idLabel" HorizontalAlignment="Left" Height="27" Margin="94,76,0,0" Grid.Row="0" VerticalAlignment="Top" Width="122"/>
         <Label Content="Grade:" Margin="10,105,0,0" HorizontalAlignment="Left" Width="74" Height="29" VerticalAlignment="Top"/>
-        <TextBox x:Name="grade_valueTextBox" HorizontalAlignment="Left" Height="24" Margin="94,108,0,0" Text="" VerticalAlignment="Top" Width="122"/>
+        <ComboBox x:Name="grade_valueComboBox" HorizontalAlignment="Left" Height="24" Margin="94,108,0,0" Text="" VerticalAlignment="Top" Width="170"/>
         <Label Content="Subject" Margin="10,139,0,0" HorizontalAlignment="Left" Width="84" Height="28" VerticalAlignment="Top"/>
-        <ComboBox x:Name="subjectComboBox" Margin="94,141,0,0" Height="24" Width="122" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <ComboBox x:Name="subjectComboBox" Margin="94,141,0,0" Height="24" Width="170" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Popup Name="GradeEditPopup"
                Placement="Mouse"
                HorizontalOffset="-50"

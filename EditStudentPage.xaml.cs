@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for EditStudentPage.xaml
-    /// </summary>
     public partial class EditStudentPage : Page
     {
         private int StudentID { get; set; }
@@ -39,10 +36,9 @@ namespace app
                         last_name = s.last_name,
                         year = s.year,
                         faculty_name = f.faculty_name
-
                     }).Single();
                 StudentFacultyComboBox.ItemsSource = context.faculties.Select(f => f.faculty_name).ToList();
-                StudentYearComboBox.ItemsSource = new short[] { 1, 2, 3, 4, 5 };
+                StudentYearComboBox.ItemsSource = Grades.GradeList;
                 StudentIdLabel.Content = StudentID;
                 StudentNameTextBox.Text = query.first_name;
                 StudentSurnameTextBox.Text = query.last_name;

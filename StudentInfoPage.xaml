@@ -13,7 +13,7 @@
     <Grid DataContext="{StaticResource GradeViewSource}">
         <Label x:Name="StudentNameLabel" HorizontalAlignment="Center" FontSize="24" Margin="0,10,0,0" Height="44" VerticalAlignment="Top"/>
         <Separator Margin="10,45,10,0" Height="22" VerticalAlignment="Top"/>
-        <DataGrid x:Name="GradeDataGrid" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,79,10,47">
+        <DataGrid x:Name="GradeDataGrid" ItemsSource="{Binding}" SelectionChanged="DataGrid_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" RowDetailsVisibilityMode="VisibleWhenSelected" IsReadOnly="True" Margin="10,98,10,47">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="grade_idColumn" Binding="{Binding grade_id}" Header="Grade ID" Width="Auto"/>
                 <DataGridTextColumn x:Name="grade_valueColumn" Binding="{Binding grade_value}" Header="Grade" Width="Auto"/>
@@ -25,7 +25,12 @@
         <Button x:Name="ReturnButton" Margin="0,0,10,10" Height="32" Content="Return" HorizontalAlignment="Right" Width="70" VerticalAlignment="Bottom" Click="CancelButton_Click"/>
         <Button x:Name="DeleteGradeButton" IsEnabled="False" Margin="200,0,0,10" Height="32" Content="Delete selected grade" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="135" Click="DeleteGradeButton_Click"/>
         <Button x:Name="RefreshButton" Margin="0,0,85,10" Height="32" Content="Refresh" HorizontalAlignment="Right" Width="75" VerticalAlignment="Bottom" Click="RefreshButton_Click" RenderTransformOrigin="-0.074,0.425"/>
-        <TextBox x:Name="AverageGradeBox" Margin="0,22,13,0" Height="23"  HorizontalAlignment="Right" Width="75" VerticalAlignment="Top"  RenderTransformOrigin="-0.074,0.425"/>
-        <Label Content="Average grade" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="0,21,93,0"></Label>
+        <Label x:Name="AverageGradeBox" Margin="0,21,10,0" Height="26"  HorizontalAlignment="Right" Width="37" VerticalAlignment="Top"  RenderTransformOrigin="-0.074,0.425"/>
+        <Label Content="Average grade" HorizontalAlignment="Right" VerticalAlignment="Top"  Margin="0,21,52,0"></Label>
+        <Label Content="Filter by subject" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="FilterSubjectTextBox" TextChanged="FilterBox_TextChanged" HorizontalAlignment="Left" Margin="108,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" Height="24"/>
+        <Label Content="Filter by grade" HorizontalAlignment="Left" Margin="245,66,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="FilterGradeComboBox" HorizontalAlignment="Left" Margin="336,68,0,0" VerticalAlignment="Top" Width="58" Height="24" SelectionChanged="FilterGradeComboBox_SelectionChanged"/>
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="441,68,0,0" VerticalAlignment="Top" Height="24" Width="49" Click="Button_Click"/>
     </Grid>
 </Page>

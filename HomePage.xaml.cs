@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace app
 {
-    /// <summary>
-    /// Interaction logic for HomePage.xaml
-    /// </summary>
     public partial class HomePage : Page
     {
         CollectionViewSource StudentViewSource;
@@ -45,7 +42,7 @@ namespace app
                     };
                 StudentViewSource.Source = query.ToList();
                 StudentDataGrid.SelectedIndex = -1;
-                FilterYear.ItemsSource = new short[] { 1, 2, 3, 4, 5 };
+                FilterYear.ItemsSource = Grades.GradeList;
                 FilterFaculty.ItemsSource = context.faculties.Select(f => f.abbrevation).ToList();
             };
         }
@@ -65,7 +62,8 @@ namespace app
             RefreshShownStudents();
         }
 
-        private void RefreshShownStudents() {
+        private void RefreshShownStudents()
+        {
             using (var context = new Entities())
             {
                 bool hasYear = false;
@@ -78,13 +76,16 @@ namespace app
                     if (item == null) throw new Exception();
                     year = short.Parse(item.ToString());
                     hasYear = true;
-                } catch { }
-                try {
+                }
+                catch { }
+                try
+                {
                     var item = FilterFaculty.SelectedItem;
                     if (item == null) throw new Exception();
                     faculty = item.ToString();
                     hasFaculty = true;
-                } catch { }
+                }
+                catch { }
                 var query =
                     from s in context.students
                     join shasp in context.student_has_faculty on s.student_id equals shasp.student_id
@@ -99,7 +100,8 @@ namespace app
                         abbrevation = p.abbrevation
 
                     };
-                if (hasYear) {
+                if (hasYear)
+                {
                     query = query.Where(s => s.year.Equals(year));
                 }
                 if (hasFaculty)
@@ -139,6 +141,8 @@ namespace app
                 try { context.SaveChanges(); } catch { return; }
                 NavigationService.Refresh();
                 DeleteButton.IsEnabled = false;
+                EditStudentButton.IsEnabled = false;
+                ShowStudentInfoButton.IsEnabled = false;
             }
         }
 
@@ -169,12 +173,14 @@ namespace app
             FilterFaculty.SelectedItem = null;
             DeleteButton.IsEnabled = false;
             ShowStudentInfoButton.IsEnabled = false;
+            EditStudentButton.IsEnabled = false;
         }
 
         private void EditStudentButton_Click(object sender, RoutedEventArgs e)
         {
             DeleteButton.IsEnabled = false;
             ShowStudentInfoButton.IsEnabled = false;
+            EditStudentButton.IsEnabled = false;
             NavigationService.Navigate(new EditStudentPage(ParseStudentID()));
         }
     }
