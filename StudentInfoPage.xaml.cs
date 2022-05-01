@@ -28,6 +28,7 @@ namespace app
                 StudentNameLabel.Content = context.students.Where(
                     s => s.student_id.Equals(StudentID)).Select(
                     s => s.first_name + " " + s.last_name).Single().ToString();
+                FilterGradeComboBox.SelectedIndex = -1;
                 FilterGradeComboBox.ItemsSource = Grades.GradeList;
             }
             GradeViewSource = (CollectionViewSource)FindResource("GradeViewSource");
@@ -112,7 +113,9 @@ namespace app
 
         private void SetState()
         {
+            FilterGradeComboBox.SelectedIndex = -1;
             GradeDataGrid.SelectedIndex = -1;
+            FilterSubjectTextBox.Text = "";
             DeleteGradeButton.IsEnabled = false;
             EditGradeButton.IsEnabled = false;
         }
@@ -124,8 +127,7 @@ namespace app
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            FilterGradeComboBox.SelectedIndex = -1;
-            FilterSubjectTextBox.Text = "";
+            SetState();
             Refresh();
         }
 
@@ -149,13 +151,14 @@ namespace app
                         grade_value = g.grade_value,
                         subject_name = sub.subject_name,
                     };
-                if (FilterGradeComboBox.Text == "")
+                if (FilterGradeComboBox.Text != "")
                 {
-                    GradeViewSource.Source = query.ToList();
+                    var grade = short.Parse(FilterGradeComboBox.Text);
+                    var grades = query.Where(g => g.grade_value == grade).ToList();
+                    GradeDataGrid.ItemsSource = grades;
                 }
                 else {
-                    var grade = short.Parse(FilterGradeComboBox.Text);
-                    GradeViewSource.Source = query.Where(g => g.grade_value.Equals(grade)).ToList();
+                    GradeDataGrid.ItemsSource = query.ToList();
                 }
                 var res = query.Average(g => g.grade_value);
                 if (res == null) AverageGradeBox.Content = "0.00";

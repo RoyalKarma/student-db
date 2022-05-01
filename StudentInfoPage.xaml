@@ -31,6 +31,6 @@
         <TextBox x:Name="FilterSubjectTextBox" TextChanged="FilterBox_TextChanged" HorizontalAlignment="Left" Margin="108,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="124" Height="24"/>
         <Label Content="Filter by grade" HorizontalAlignment="Left" Margin="245,66,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="FilterGradeComboBox" HorizontalAlignment="Left" Margin="336,68,0,0" VerticalAlignment="Top" Width="58" Height="24" SelectionChanged="FilterGradeComboBox_SelectionChanged"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="441,68,0,0" VerticalAlignment="Top" Height="24" Width="49" Click="Button_Click"/>
+        <Button Content="Clear" Margin="0,68,10,0" VerticalAlignment="Top" Height="24" Click="Button_Click" HorizontalAlignment="Right" Width="49"/>
     </Grid>
 </Page>
